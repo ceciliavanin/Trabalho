@@ -18,7 +18,8 @@ public class ClasseColetora {
 	private NumberFormat formato = NumberFormat.getInstance(new Locale("pt", "BR"));
 	public List<Produto> getProduto(List<String> lista){
 		List<Produto> listProduto = new ArrayList<>();
-		Pattern p = Pattern.compile("[o-9]=.*");
+		
+		Pattern p = Pattern.compile("[0-9]=.*");
 		
 		lista.forEach(e -> {
 			
