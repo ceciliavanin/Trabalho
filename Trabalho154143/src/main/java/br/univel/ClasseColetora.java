@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -16,10 +17,11 @@ import java.util.regex.Pattern;
 
 public class ClasseColetora {
 	private NumberFormat formato = NumberFormat.getInstance(new Locale("pt", "BR"));
+	
 	public List<Produto> getProduto(List<String> lista){
 		List<Produto> listProduto = new ArrayList<>();
 		
-		Pattern p = Pattern.compile("[0-9]=.*");
+		Pattern p = Pattern.compile("[0-9]+.*");
 		
 		lista.forEach(e -> {
 			
@@ -35,21 +37,37 @@ public class ClasseColetora {
 		
 	} 
 	 
-	public Produto getProduto(String str){
+private Produto getProduto(String str) {
+	int indexPrimeiroEspaco = str.indexOf(' ');
+	String subStringCodigo = str.substring(0, indexPrimeiroEspaco);
+	int id = Integer.parseInt(subStringCodigo);
+
+	String strSemCodigo = str.substring(indexPrimeiroEspaco).trim();
+
+	int indexDolar = strSemCodigo.indexOf("US$");
+
+	String descricao = strSemCodigo.substring(0, indexDolar).trim();
+
+	BigDecimal preco = null;
+	String strPreco = null;
+
+	try {
 		
-		try {
-			int id = Integer.parseInt(str.substring(0, str.indexOf(' ')));
-			String descricao = str.substring(str.indexOf(' ')+1, str.lastIndexOf(' '));
-			BigDecimal preco = new BigDecimal(formato.parse(str.substring(0,str.lastIndexOf(' '))).doubleValue());
-			Produto produto = new Produto(id, descricao, preco);
-			return produto;
-		} catch (ParseException e) {
-			
-			e.printStackTrace();
-			return null;
-		}
+		strPreco = strSemCodigo.substring(indexDolar + 3).trim();
+		preco = new BigDecimal(formato.parse(strPreco).doubleValue());
+		preco.setScale(2, RoundingMode.HALF_EVEN);
+
+	} catch (NumberFormatException | ParseException e) {
+
+		System.out.println(strPreco);
+
+		e.printStackTrace();
 	}
-	
+
+	Produto p = new Produto(id, descricao, preco);
+	return p;
+}
+
 	public List<String> lerArquivo() {
 		ArrayList<String> lista = new ArrayList<>();
 
@@ -68,5 +86,4 @@ public class ClasseColetora {
 		}
 		return lista;
 	}
-
 }

@@ -9,7 +9,6 @@ public class ExecutaColetora {
 
 	public static void main(String[] args) {
 		
-	
 	ClasseColetora c = new ClasseColetora();
 	List<String> lista = c.lerArquivo();
 
@@ -18,9 +17,10 @@ public class ExecutaColetora {
 	NumberFormat formatUS = NumberFormat.getCurrencyInstance(new Locale("en", "US"));
 	NumberFormat formatBR = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
 
-	BigDecimal cotacao = new BigDecimal(3.37);
+	BigDecimal cotacao = new BigDecimal(3.47);
 
-	listaProduto.forEach(e->{	
+	listaProduto.forEach(e -> {	
+
 		System.out.println("Id: " + e.getId());
 		System.out.println("Descrição: " + e.getDescricao());
 		System.out.println("Preço Dólar: " + formatUS.format(e.getValor()));
