@@ -10,8 +10,8 @@ public class ExecutaColetora {
 	public static void main(String[] args) {
 		
 	ClasseColetora c = new ClasseColetora();
-	List<String> lista = c.lerArquivo();
-
+	List<String> lista = c.lerArquivo("lista.txt");
+	c.lerArquivo("cliente");
 	List<Produto> listaProduto = c.getProduto(lista);
 
 	NumberFormat formatUS = NumberFormat.getCurrencyInstance(new Locale("en", "US"));
