@@ -3,6 +3,10 @@ package br.univel;
 import java.math.BigDecimal;
 
 public class Produto {
+	public Produto(){
+		
+		
+	}
 	public Produto(int id, String descricao, BigDecimal valor) {
 		super();
 		this.id = id;
