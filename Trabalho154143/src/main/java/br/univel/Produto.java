@@ -2,10 +2,11 @@ package br.univel;
 
 import java.math.BigDecimal;
 
+import javax.xml.bind.annotation.XmlRootElement;
+@XmlRootElement
 public class Produto {
 	public Produto(){
-		
-		
+
 	}
 	public Produto(int id, String descricao, BigDecimal valor) {
 		super();
@@ -13,12 +14,10 @@ public class Produto {
 		this.descricao = descricao;
 		this.valor = valor;
 	}
-	
-	
+		
 	int id;
 	String descricao;
 	BigDecimal valor;
-	
 	
 	public int getId() {
 		return id;
