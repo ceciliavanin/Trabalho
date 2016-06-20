@@ -30,9 +30,4 @@ public class GravaXml {
 		}
 		return out.toString();
 	}
-	public static void main(String[] args) {
-		Produto p = new Produto();
-		new GravaXml().gravaXml(p);
-		
-	}
 }

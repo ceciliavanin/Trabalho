@@ -86,4 +86,9 @@ private Produto getProduto(String str) {
 		}
 		return lista;
 	}
+
+	public List<Cliente> getCliente(List<String> lista) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
