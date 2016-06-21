@@ -23,11 +23,14 @@ public class GravaXml {
 			FileWriter fw = new FileWriter(classe.getSimpleName() +".xml");
 			fw.write(xml);
 			fw.close();
+			return out.toString();
 		} catch (JAXBException e) {
 			e.printStackTrace();
+			return null;
 		} catch (IOException e) {
 			e.printStackTrace();
+			return null;
 		}
-		return out.toString();
+		
 	}
 }
