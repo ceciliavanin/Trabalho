@@ -26,7 +26,7 @@ public class ExecutaColetora {
 			System.out.println("Id: " + e.getId());
 			System.out.println("Nome: " + e.getNome());
 			System.out.println("Endereço: "  + e.getEndereco());
-			System.out.println("Numero" + e.getNumero());
+			System.out.println("Numero: " + e.getNumero());
 			System.out.println("Complemento: " + e.getComplemento());
 			System.out.println("Bairro: " + e.getBairro());
 			System.out.println("Cidade: " + e.getCidade());
@@ -55,6 +55,8 @@ public class ExecutaColetora {
 			System.out.println("Descrição: " + e.getDescricao());
 			System.out.println("Preço Dólar: " + formatUS.format(e.getValor()));
 			System.out.println("Preço Real: " + formatBR.format(e.getValor().multiply(cotacao)));
+			
+			
 		});
 		
 	}

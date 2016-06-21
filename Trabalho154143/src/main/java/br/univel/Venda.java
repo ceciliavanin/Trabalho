@@ -9,6 +9,9 @@ public class Venda {
 	BigDecimal valortotal;
 	BigDecimal valortroco;
 
+	public Venda(){
+		
+	}
 	
 	public int getId() {
 		return id;

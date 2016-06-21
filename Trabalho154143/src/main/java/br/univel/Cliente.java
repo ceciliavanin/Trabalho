@@ -13,6 +13,9 @@ public class Cliente {
 	String telefone;
 	String celular;
 	
+	public Cliente() {
+
+	}
 	public Cliente(int id, String nome, String endereco, int numero, String complemento, String bairro, String cidade,
 			String estado, String cep, String telefone, String celular) {
 		super();

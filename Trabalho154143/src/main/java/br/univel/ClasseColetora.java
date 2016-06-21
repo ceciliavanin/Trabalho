@@ -1,3 +1,4 @@
+
 package br.univel;
 
 import java.io.BufferedReader;
@@ -30,14 +31,13 @@ public class ClasseColetora {
 				if(m.matches()){
 					listProduto.add(getProduto(e));
 				}
-				
 			}
 		});
 		return listProduto;
 		
 	} 
 	 
-private Produto getProduto(String str) {
+	private Produto getProduto(String str) {
 	int indexPrimeiroEspaco = str.indexOf(' ');
 	String subStringCodigo = str.substring(0, indexPrimeiroEspaco);
 	int id = Integer.parseInt(subStringCodigo);
@@ -66,8 +66,8 @@ private Produto getProduto(String str) {
 
 	Produto p = new Produto(id, descricao, preco);
 	return p;
-}
-
+	}
+	
 	public List<String> lerArquivo(String arq) {
 		ArrayList<String> lista = new ArrayList<>();
 
@@ -88,7 +88,41 @@ private Produto getProduto(String str) {
 	}
 
 	public List<Cliente> getCliente(List<String> lista) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Cliente> listCliente = new ArrayList<>();
+		
+		Pattern p = Pattern.compile("[0-9]+.*");
+		
+		lista.forEach(e -> {
+			
+			if (!e.startsWith("------")){
+				Matcher m = p.matcher(e);
+				if(m.matches()){
+					listCliente.add(getCliente(e));
+				}
+			}
+		});
+		return listCliente;
 	}
+	public Cliente getCliente(String str){
+			int primeiroCampo = str.indexOf('|');
+			String subStringCodigo = str.substring(0, primeiroCampo);
+			int id = Integer.parseInt(subStringCodigo);
+			
+			int segundoCampo = str.indexOf('|');
+			String Camponome = str.substring(primeiroCampo, segundoCampo);
+			String nome = Camponome.substring(0, segundoCampo);
+			
+			String endereco = null;
+			int numero = 0;
+			String complemento = null;
+			String bairro = null;
+			String cidade = null;
+			String estado = null;
+			String cep = null;
+			String telefone = null;
+			String cecular = null;
+			Cliente c = new Cliente(id, nome, endereco, numero, complemento, bairro, cidade, estado, cep, telefone, cecular);
+			// System.out.println();
+			return c;
+		}
 }

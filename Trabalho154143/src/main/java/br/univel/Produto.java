@@ -1,6 +1,7 @@
 package br.univel;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
@@ -18,7 +19,13 @@ public class Produto {
 	int id;
 	String descricao;
 	BigDecimal valor;
-	
+	List<Produto> lp;
+	public List<Produto> getLp() {
+		return lp;
+	}
+	public void setLp(List<Produto> lp) {
+		this.lp = lp;
+	}
 	public int getId() {
 		return id;
 	}
