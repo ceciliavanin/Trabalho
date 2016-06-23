@@ -1,6 +1,12 @@
 package br.univel;
 
-public class Cliente {
+import java.io.Serializable;
+
+public class Cliente implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4915334596112038L;
 	int id;
 	String nome;
 	String endereco;

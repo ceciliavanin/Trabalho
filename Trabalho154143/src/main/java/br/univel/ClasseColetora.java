@@ -88,20 +88,7 @@ public class ClasseColetora {
 	}
 
 	public List<Cliente> getCliente(List<String> lista) {
-		List<Cliente> listCliente = new ArrayList<>();
-		
-		Pattern p = Pattern.compile("[0-9]+.*");
-		
-		lista.forEach(e -> {
-			
-			if (!e.startsWith("------")){
-				Matcher m = p.matcher(e);
-				if(m.matches()){
-					listCliente.add(getCliente(e));
-				}
-			}
-		});
-		return listCliente;
+	return null;
 	}
 	public Cliente getCliente(String str){
 			int primeiroCampo = str.indexOf('|');

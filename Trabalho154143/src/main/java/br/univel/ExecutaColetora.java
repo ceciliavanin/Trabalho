@@ -1,20 +1,33 @@
 package br.univel;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
 
-public class ExecutaColetora {
-
-	
+public class ExecutaColetora{
 	
 	public static void main(String[] args) {
 		new ExecutaColetora().lerProduto();
 		new ExecutaColetora().lerCliente();
-
-
-
+		 
+		Produto p = new Produto();
+		File file = new File("arq.dat");
+		
+		SerIMP<Produto> ser = new SerIMP<Produto>(){};
+		
+		try{
+			ser.gravar(p, file);
+			
+			Produto pLido = ser.ler(file);
+			
+			System.out.println(pLido.getId());
+			System.out.println(pLido.getDescricao());
+			System.out.println(pLido.getValor());
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 
 	private void lerCliente() {
@@ -36,7 +49,6 @@ public class ExecutaColetora {
 			System.out.println("Celular: " + e.getCelular());
 			
 		});
-		
 	}
 
 	private void lerProduto() {
@@ -58,7 +70,7 @@ public class ExecutaColetora {
 			
 			
 		});
-		
+	
 	}
 }
 

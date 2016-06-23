@@ -29,25 +29,22 @@ public class RealizaVendaTest {
 	}
 
 	
-	@Parameters(name = "Teste {index}: éprasomar({0}-{1})={2}")
+	@Parameters(name = "Teste {index}: prasubtract({0}-{1})={2})")
 	public static Iterable<Object[]> data1() {
 		return Arrays.asList(new Object[][] { 
-			{ 120, 110, 10 }, 
-			{ 12, 9, 3 }, 
-			{ 20, 10, 10 }, 
-			{ 41, 22, 19 }, 
-			{ 10, 10, 0 }			
+			{ 120.00, 110.00, 10.00 }, 
+			{ 12.0, 9.0, 3.0 }, 
+			{ 20.0, 10.0, 10.0 }, 
+			{ 41.0, 22.0, 19.0 }, 
+			{ 10.0, 10.0, 0.0 }			
 		});
 	}
 
 	@Test
-	public void test_sub() {	
+	public void testaTroco() {	
 		assertEquals(valorTroco, RealizaVenda.troco(valorRecebido, valorTotal));
 	}
-	@Test
-	public void testaTroco(){
-		assertEquals(valorTroco, RealizaVenda.troco(valorRecebido, valorTotal));
-	}
+	
 	
 
 }
