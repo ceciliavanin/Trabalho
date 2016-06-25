@@ -99,16 +99,10 @@ public class ClasseColetora {
 			String Camponome = str.substring(primeiroCampo, segundoCampo);
 			String nome = Camponome.substring(0, segundoCampo);
 			
-			String endereco = null;
-			int numero = 0;
-			String complemento = null;
-			String bairro = null;
 			String cidade = null;
 			String estado = null;
-			String cep = null;
 			String telefone = null;
-			String cecular = null;
-			Cliente c = new Cliente(id, nome, endereco, numero, complemento, bairro, cidade, estado, cep, telefone, cecular);
+			Cliente c = new Cliente(id, nome, cidade, estado, telefone);
 			// System.out.println();
 			return c;
 		}

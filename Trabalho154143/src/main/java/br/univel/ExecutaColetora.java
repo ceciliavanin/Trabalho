@@ -11,7 +11,10 @@ public class ExecutaColetora{
 	public static void main(String[] args) {
 		new ExecutaColetora().lerProduto();
 		new ExecutaColetora().lerCliente();
-		 
+		new ExecutaColetora().executaSerializable();
+	}
+	
+	public void executaSerializable(){
 		Produto p = new Produto();
 		File file = new File("arq.dat");
 		
@@ -38,15 +41,9 @@ public class ExecutaColetora{
 
 			System.out.println("Id: " + e.getId());
 			System.out.println("Nome: " + e.getNome());
-			System.out.println("Endereço: "  + e.getEndereco());
-			System.out.println("Numero: " + e.getNumero());
-			System.out.println("Complemento: " + e.getComplemento());
-			System.out.println("Bairro: " + e.getBairro());
 			System.out.println("Cidade: " + e.getCidade());
 			System.out.println("Estado: " + e.getEstado());
-			System.out.println("CEP: " + e.getCep());
 			System.out.println("Telefone: " + e.getTelefone());
-			System.out.println("Celular: " + e.getCelular());
 			
 		});
 	}
