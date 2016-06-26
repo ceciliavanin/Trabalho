@@ -35,9 +35,9 @@ public class ExecutaColetora{
 
 	private void lerCliente() {
 		ClasseColetora c = new ClasseColetora();
-		List<String> lista = c.lerArquivo("listaCliente.txt");
-		List<Cliente> listaProduto = c.getCliente(lista);
-		listaProduto.forEach(e -> {	
+		List<String> lista = c.lerArquivo("MOCK_DATA.csv");
+		List<Cliente> listaCliente = c.getCliente(lista);
+		listaCliente.forEach(e -> {	
 
 			System.out.println("Id: " + e.getId());
 			System.out.println("Nome: " + e.getNome());
@@ -69,6 +69,29 @@ public class ExecutaColetora{
 		});
 	
 	}
+	
+	private void lerCliente1() {
+		ClasseColetora c = new ClasseColetora();
+		List<String> lista = c.lerArquivo("listaProduto.txt");
+		List<Produto> listaProduto = c.getProduto(lista);
+
+		NumberFormat formatUS = NumberFormat.getCurrencyInstance(new Locale("en", "US"));
+		NumberFormat formatBR = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+
+		BigDecimal cotacao = new BigDecimal(3.47);
+
+		listaProduto.forEach(e -> {	
+
+			System.out.println("Id: " + e.getId());
+			System.out.println("Descrição: " + e.getDescricao());
+			System.out.println("Preço Dólar: " + formatUS.format(e.getValor()));
+			System.out.println("Preço Real: " + formatBR.format(e.getValor().multiply(cotacao)));
+			
+			
+		});
+	
+	}
+
 }
 
 
