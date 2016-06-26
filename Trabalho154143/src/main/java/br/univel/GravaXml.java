@@ -33,4 +33,8 @@ public class GravaXml {
 		}
 		
 	}
+	public static void main(String[] args) {
+		Cliente cl = new Cliente();
+		System.out.println(new GravaXml().gravaXml(cl));
+	}
 }

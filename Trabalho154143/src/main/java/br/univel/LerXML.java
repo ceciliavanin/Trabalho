@@ -8,8 +8,7 @@ import javax.xml.bind.Unmarshaller;
 
 public class LerXML {
 
-	public LerXML(Object obj) {
-		Class<?> classe = obj.getClass();
+	public String LerXml(Object obj) {
 		JAXBContext context;
 		try {
 			context = JAXBContext.newInstance(obj.getClass());
@@ -20,10 +19,12 @@ public class LerXML {
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		}
+		return obj.toString();
 
 	}
 
 public static void main(String[] args) {
-
+	Cliente cl = new Cliente();
+	System.out.println(new LerXML().LerXml(cl));
 }
 }
