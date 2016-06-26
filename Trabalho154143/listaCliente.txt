@@ -1,6 +1,0 @@
----codigo nome endereco numero complemento bairro cidade cep telefone celular
-0001|Augusto da Silva Rua da Glória|1234|Fundos|Nossa Senhora|Carmélia do Sul|85804-030|090909090|909090909
-0002|Joaquina da Oliveira Pinto|Rua Santo Antonio|4321|Bloco A|Centro|Curitiba|85899-020|080808080|808080808
-0003|Marcela Bischoff|Rua Europa|5678|Bloco B|Barra da Tijuca|Rio de Janeiro|88021-040|070707070|606060606
-0004|Vanessa Formigueri|Rua Flor de Liz|8765|Sem Informação|Cidade Corbélia|Corbélia|85420-000|050505050|404040404
-0005|Cecilia Vasconscelos|Rua Florianópolis|9182|Ap.1400|Alphaville|São Paulo|83330-020|98989898|76767676
