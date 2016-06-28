@@ -21,18 +21,18 @@ public class ConexaoBanco {
 			String login; 
 			String url; 
 			String password; 
-			System.out.println("************Teste de leitura do arquivo de propriedades************");
-			
+						
 			Properties prop = getProp();
 			
 			login = prop.getProperty("prop.server.login");
 			url = prop.getProperty("prop.server.url");
 			password = prop.getProperty("prop.server.password");
-			
 		
 			try {
 				Class.forName("org.h2.Driver");
 				Connection con = DriverManager.getConnection(url, login, password);
+				System.out.println(password);
+				System.out.println(con);
 				return con;
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
