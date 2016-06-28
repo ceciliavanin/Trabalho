@@ -2,11 +2,13 @@ package br.univel;
 
 import java.io.Serializable;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import br.univel.banco.Coluna;
 import br.univel.banco.Tabela;
 
 @Tabela ("CADASTRO_CLIENTE")
-
+@XmlRootElement
 public class Cliente implements Serializable{
 	/**
 	 * 

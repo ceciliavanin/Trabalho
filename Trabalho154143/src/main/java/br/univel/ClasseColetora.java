@@ -117,4 +117,12 @@ public class ClasseColetora {
 
 		return c;
 	}
+	public boolean VerificarArquivo(String str){
+		
+		File f = new File(str);
+		if(f.exists() && !f.isDirectory()){
+			return true;
+		}
+		return false;
+	}
 }
