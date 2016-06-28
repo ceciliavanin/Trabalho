@@ -8,6 +8,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -15,6 +17,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import br.univel.banco.ConexaoBanco;
 
 public class ClasseColetora {
 
@@ -31,6 +35,15 @@ public class ClasseColetora {
 				Matcher m = p.matcher(e);
 				if(m.matches()){
 					listProduto.add(getProduto(e));
+					ConexaoBanco c = new ConexaoBanco();
+					 Connection con;
+					try {
+						con = c.abrirConexao();
+						 PreparedStatement ps = c.getSqlInsert(con, listProduto);
+
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
 				}
 			}
 		});
@@ -114,7 +127,15 @@ public class ClasseColetora {
 		String telefone = itens[4];
 
 		Cliente c = new Cliente(id, nome, cidade, estado, telefone);
+		ConexaoBanco co = new ConexaoBanco();
+		 Connection con;
+		try {
+			con = co.abrirConexao();
+			 PreparedStatement ps = co.getSqlInsert(con, c);
 
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 		return c;
 	}
 	public boolean VerificarArquivo(String str){

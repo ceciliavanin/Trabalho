@@ -50,25 +50,6 @@ public class ConexaoBanco {
 		}
 	}
 
-	public Connection abrirconexcao() {
-		try {
-			Class.forName("org.h2.Driver");
-			String url = "jdbc:h2:~/banco";
-			String user = "sa";
-			String pass = "sa";
-			con = DriverManager.getConnection(url, user, pass);
-			return con;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return null;
-
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			return null;
-		}
-
-	}
-
 	protected String getCreateTable(Object obj) throws SQLException {
 		Class<? extends Object> cl = obj.getClass();
 		try {
@@ -176,7 +157,7 @@ public class ConexaoBanco {
 	
 	}
 
-	protected PreparedStatement getSqlInsert(Connection con, Object obj) {
+	public PreparedStatement getSqlInsert(Connection con, Object obj) {
 
 		Class<? extends Object> cl = obj.getClass();
 
