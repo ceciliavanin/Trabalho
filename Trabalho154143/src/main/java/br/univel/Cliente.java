@@ -2,15 +2,30 @@ package br.univel;
 
 import java.io.Serializable;
 
+import br.univel.banco.Coluna;
+import br.univel.banco.Tabela;
+
+@Tabela ("CADASTRO_CLIENTE")
+
 public class Cliente implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 4915334596112038L;
+	
+	@Coluna (nome="CadId", pk=true)
 	int id;
+	
+	@Coluna (nome="CadNome", tamanho=50)
 	String nome;
+
+	@Coluna (nome="CadCidade", tamanho=30)
 	String cidade;
+	
+	@Coluna (nome="CadEstado", tamanho=30)
 	String estado;
+	
+	@Coluna (nome="CadTelefone", tamanho=10)
 	String telefone;
 	
 	public Cliente() {
