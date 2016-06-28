@@ -78,6 +78,12 @@ public class CadProduto extends JPanel {
 		add(btnCadastrar, gbc_btnCadastrar);
 		
 		JButton btnLimpar = new JButton("Limpar");
+		btnLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tfDescricao.setText("");
+				txtTfpreco.setText("");				
+			}
+		});
 		GridBagConstraints gbc_btnLimpar = new GridBagConstraints();
 		gbc_btnLimpar.insets = new Insets(0, 0, 0, 5);
 		gbc_btnLimpar.gridx = 2;

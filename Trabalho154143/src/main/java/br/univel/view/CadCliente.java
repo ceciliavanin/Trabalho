@@ -124,6 +124,10 @@ public class CadCliente extends JPanel {
 		JButton btnLimpar = new JButton("Limpar");
 		btnLimpar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				tfNomeCliente.setText("");
+				tfCidade.setText("");
+				tfEstado.setText("");
+				tfTelefone.setText("");
 				
 			}
 		});
@@ -138,7 +142,12 @@ public class CadCliente extends JPanel {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				System.exit(0); 
+			}
+
+			private void Dispose() {
+				// TODO Auto-generated method stub
+				
 			}
 		});
 		GridBagConstraints gbc_btnCancelar = new GridBagConstraints();

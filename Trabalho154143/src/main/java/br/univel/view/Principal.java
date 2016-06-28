@@ -126,6 +126,7 @@ public class Principal extends JFrame {
 		gbc_tabbedPane.gridx = 0;
 		gbc_tabbedPane.gridy = 1;
 		contentPane.add(tabbedPane, gbc_tabbedPane);
+		
 	}
 
 	private void TelaProduto() {
@@ -140,7 +141,7 @@ public class Principal extends JFrame {
 		CadProduto telaProduto = new CadProduto();
 		tabbedPane.addTab(titulo , telaProduto);
 		mostra();
-		
+		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 	}
 	
 
