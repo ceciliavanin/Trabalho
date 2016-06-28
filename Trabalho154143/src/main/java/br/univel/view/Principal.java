@@ -93,18 +93,54 @@ public class Principal extends JFrame {
 		
 		JMenuItem mntmArquivoXml = new JMenuItem("Arquivo XML");
 		mnImportar.add(mntmArquivoXml);
-		
+		mntmArquivoXml.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+				ImportarXml ex = new ImportarXml();
+				ex.show();
+			}
+
+		});
 		JMenuItem mntmArquivoBinario = new JMenuItem("Arquivo Bin\u00E1rio");
 		mnImportar.add(mntmArquivoBinario);
+		mntmArquivoBinario.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+				ImportarBinario ex = new ImportarBinario();
+				ex.show();
+			}
+
+		});
+
+		
 		
 		JMenu mnExportar = new JMenu("Exportar");
 		mnFerramentas.add(mnExportar);
 		
 		JMenuItem mntmArquivoBinario_1 = new JMenuItem("Arquivo Bin\u00E1rio");
 		mnExportar.add(mntmArquivoBinario_1);
+		mntmArquivoBinario_1.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+				ExportaBinario ex = new ExportaBinario();
+				ex.show();
+			}
+
+		});
+
+		
 		
 		JMenuItem mntmArquivoXml_1 = new JMenuItem("Arquivo XML");
 		mnExportar.add(mntmArquivoXml_1);
+		mntmArquivoXml_1.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+				ExportaXml ex = new ExportaXml();
+				ex.show();
+			}
+
+		});
+		
 		
 		JMenu mnRelatrios = new JMenu("Relat\u00F3rios");
 		menuBar.add(mnRelatrios);

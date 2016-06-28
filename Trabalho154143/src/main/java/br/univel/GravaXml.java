@@ -24,7 +24,6 @@ public class GravaXml {
 				fw.write(xml);
 				fw.close();
 	            String res = "Arquivo Exportado com sucesso";
-	            System.out.println(res);
 			return true;
 		} catch (JAXBException e) {
 			e.printStackTrace();

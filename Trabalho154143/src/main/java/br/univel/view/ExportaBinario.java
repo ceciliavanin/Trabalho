@@ -4,26 +4,25 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import br.univel.Cliente;
 import br.univel.GravaXml;
 import br.univel.Produto;
+import br.univel.SerIMP;
 
 import java.awt.GridBagLayout;
 import javax.swing.JRadioButton;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.awt.event.ActionEvent;
-import javax.swing.SwingConstants;
 
-public class ExportaXml extends JFrame {
+public class ExportaBinario extends JFrame {
 
 	private JPanel contentPane;
 
@@ -34,7 +33,7 @@ public class ExportaXml extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ExportaXml frame = new ExportaXml();
+					ExportaBinario frame = new ExportaBinario();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -46,24 +45,24 @@ public class ExportaXml extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ExportaXml() {
+	public ExportaBinario() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 362, 300);
+		setBounds(100, 100, 381, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[]{0, 0, 0, 58, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
-		gbl_contentPane.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
+		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
+		gbl_contentPane.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
 		JRadioButton rdbtnCliente = new JRadioButton("Cliente");
 		GridBagConstraints gbc_rdbtnCliente = new GridBagConstraints();
 		gbc_rdbtnCliente.fill = GridBagConstraints.HORIZONTAL;
 		gbc_rdbtnCliente.insets = new Insets(0, 0, 5, 5);
-		gbc_rdbtnCliente.gridx = 1;
+		gbc_rdbtnCliente.gridx = 2;
 		gbc_rdbtnCliente.gridy = 1;
 		contentPane.add(rdbtnCliente, gbc_rdbtnCliente);
 		
@@ -71,7 +70,7 @@ public class ExportaXml extends JFrame {
 		GridBagConstraints gbc_rdbtnProduto = new GridBagConstraints();
 		gbc_rdbtnProduto.fill = GridBagConstraints.HORIZONTAL;
 		gbc_rdbtnProduto.insets = new Insets(0, 0, 5, 5);
-		gbc_rdbtnProduto.gridx = 1;
+		gbc_rdbtnProduto.gridx = 2;
 		gbc_rdbtnProduto.gridy = 2;
 		contentPane.add(rdbtnProduto, gbc_rdbtnProduto);
 		
@@ -79,37 +78,43 @@ public class ExportaXml extends JFrame {
 		GridBagConstraints gbc_rdbtnVenda = new GridBagConstraints();
 		gbc_rdbtnVenda.fill = GridBagConstraints.HORIZONTAL;
 		gbc_rdbtnVenda.insets = new Insets(0, 0, 5, 5);
-		gbc_rdbtnVenda.gridx = 1;
+		gbc_rdbtnVenda.gridx = 2;
 		gbc_rdbtnVenda.gridy = 3;
 		contentPane.add(rdbtnVenda, gbc_rdbtnVenda);
 		
-		JButton btnNewButton = new JButton("Exportar");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnExportar = new JButton("Exportar");
+		btnExportar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				GravaXml g = new GravaXml();
+				SerIMP s = new SerIMP();
+				
 				if (rdbtnVenda.isSelected()){
-					g.gravaXml(Venda.class);
+					File f = new File("Venda");
+					s.gravar(Venda.class, f);
 					JOptionPane.showMessageDialog(rootPane, "Arquivo exportado com sucesso\nLocal: C:/Users/Vanessa/git/Trabalho/Trabalho154143!");
 
 				}
 				else if (rdbtnCliente.isSelected()){
-					g.gravaXml(Cliente.class);
+					File f = new File("Cliente");
+					s.gravar(Venda.class, f);
 					JOptionPane.showMessageDialog(rootPane, "Arquivo exportado com sucesso\nLocal: C:/Users/Vanessa/git/Trabalho/Trabalho154143!");
 
 				}else if (rdbtnProduto.isSelected()){
-					g.gravaXml(Produto.class);
+					File f = new File("Produto");
+					s.gravar(Venda.class, f);
 					JOptionPane.showMessageDialog(rootPane, "Arquivo exportado com sucesso\nLocal: C:/Users/Vanessa/git/Trabalho/Trabalho154143!");
 
 				}else {
 					JOptionPane.showMessageDialog(rootPane, "Selecionar uma opção para exportar!");
 				}
+
+			
 			}
 		});
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
-		gbc_btnNewButton.gridx = 3;
-		gbc_btnNewButton.gridy = 4;
-		contentPane.add(btnNewButton, gbc_btnNewButton);
+		GridBagConstraints gbc_btnExportar = new GridBagConstraints();
+		gbc_btnExportar.insets = new Insets(0, 0, 0, 5);
+		gbc_btnExportar.gridx = 3;
+		gbc_btnExportar.gridy = 5;
+		contentPane.add(btnExportar, gbc_btnExportar);
 	}
 
 }

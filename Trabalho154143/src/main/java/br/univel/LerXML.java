@@ -26,12 +26,7 @@ public class LerXML {
 			e.printStackTrace();
 			return false;
 		}
-		
-
 	}
 
-public static void main(String[] args) {
-	Cliente cl = new Cliente();
-	System.out.println(new LerXML().LerXml(cl));
-}
+
 }
