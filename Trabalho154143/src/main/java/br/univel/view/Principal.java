@@ -13,14 +13,17 @@ import javax.swing.JTabbedPane;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Principal extends JFrame {
 
 	private JPanel contentPane;
-
+	private JTabbedPane tabbedPane;
 	/**
 	 * Launch the application.
 	 */
+	private String titulo; 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -63,9 +66,24 @@ public class Principal extends JFrame {
 		
 		JMenuItem mntmCadastroClientes = new JMenuItem("Cadastro Clientes");
 		mnCadastro.add(mntmCadastroClientes);
+		mntmCadastroClientes.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+				TelaCliente();
+			}
+
+		});
+		
 		
 		JMenuItem mntmCadastroDeProdutos = new JMenuItem("Cadastro de Produtos");
 		mnCadastro.add(mntmCadastroDeProdutos);
+		mntmCadastroDeProdutos.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+				TelaProduto();
+			}
+
+		});
 		
 		JMenu mnFerramentas = new JMenu("Ferramentas");
 		menuBar.add(mnFerramentas);
@@ -100,7 +118,7 @@ public class Principal extends JFrame {
 		JMenuItem mntmVendas = new JMenuItem("Vendas");
 		mnRelatrios.add(mntmVendas);
 		
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		GridBagConstraints gbc_tabbedPane = new GridBagConstraints();
 		gbc_tabbedPane.gridheight = 2;
 		gbc_tabbedPane.insets = new Insets(0, 0, 5, 0);
@@ -108,5 +126,38 @@ public class Principal extends JFrame {
 		gbc_tabbedPane.gridx = 0;
 		gbc_tabbedPane.gridy = 1;
 		contentPane.add(tabbedPane, gbc_tabbedPane);
+	}
+
+	private void TelaProduto() {
+		titulo = "Produto";
+		for (int i = 0; i < tabbedPane.getTabCount(); i++){
+			if (tabbedPane.getTitleAt(i).equals(titulo)){
+				tabbedPane.setSelectedIndex(i);
+				return;
+			}
+			
+		}
+		CadProduto telaProduto = new CadProduto();
+		tabbedPane.addTab(titulo , telaProduto);
+		mostra();
+		
+	}
+	
+
+	private void TelaCliente() {
+		titulo = "Cliente";
+		for (int i = 0; i < tabbedPane.getTabCount(); i++){
+			if (tabbedPane.getTitleAt(i).equals(titulo)){
+				tabbedPane.setSelectedIndex(i);
+				return;
+			}
+			
+		}
+		CadCliente telacliente = new CadCliente();
+		tabbedPane.addTab(titulo , telacliente);
+		mostra();
+	}	
+	private void mostra() {
+		tabbedPane.setSelectedIndex(tabbedPane.getTabCount()-1);
 	}
 }
