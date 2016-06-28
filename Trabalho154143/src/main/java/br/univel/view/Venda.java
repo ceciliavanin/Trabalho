@@ -192,6 +192,13 @@ public class Venda extends JPanel {
 		add(btnGravar, gbc_btnGravar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+				System.exit(0);
+			
+			}
+		});
 		GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
 		gbc_btnCancelar.insets = new Insets(0, 0, 0, 5);
 		gbc_btnCancelar.gridx = 3;

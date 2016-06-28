@@ -8,6 +8,8 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class CadCliente extends JPanel {
 	private JTextField tfNomeCliente;
@@ -20,9 +22,9 @@ public class CadCliente extends JPanel {
 	 */
 	public CadCliente() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{46, 50, 89, 32, 135, 0};
+		gridBagLayout.columnWidths = new int[]{46, 50, 89, 213, 0};
 		gridBagLayout.rowHeights = new int[]{32, 20, 20, 20, 20, 23, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
@@ -47,7 +49,7 @@ public class CadCliente extends JPanel {
 		gbc_tfNomeCliente.anchor = GridBagConstraints.NORTH;
 		gbc_tfNomeCliente.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tfNomeCliente.insets = new Insets(0, 0, 5, 0);
-		gbc_tfNomeCliente.gridwidth = 4;
+		gbc_tfNomeCliente.gridwidth = 3;
 		gbc_tfNomeCliente.gridx = 1;
 		gbc_tfNomeCliente.gridy = 1;
 		add(tfNomeCliente, gbc_tfNomeCliente);
@@ -66,7 +68,7 @@ public class CadCliente extends JPanel {
 		gbc_tfCidade.anchor = GridBagConstraints.NORTH;
 		gbc_tfCidade.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tfCidade.insets = new Insets(0, 0, 5, 0);
-		gbc_tfCidade.gridwidth = 4;
+		gbc_tfCidade.gridwidth = 3;
 		gbc_tfCidade.gridx = 1;
 		gbc_tfCidade.gridy = 2;
 		add(tfCidade, gbc_tfCidade);
@@ -85,7 +87,7 @@ public class CadCliente extends JPanel {
 		gbc_tfEstado.anchor = GridBagConstraints.NORTH;
 		gbc_tfEstado.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tfEstado.insets = new Insets(0, 0, 5, 0);
-		gbc_tfEstado.gridwidth = 4;
+		gbc_tfEstado.gridwidth = 3;
 		gbc_tfEstado.gridx = 1;
 		gbc_tfEstado.gridy = 3;
 		add(tfEstado, gbc_tfEstado);
@@ -120,6 +122,11 @@ public class CadCliente extends JPanel {
 		add(btnCadastrar, gbc_btnCadastrar);
 		
 		JButton btnLimpar = new JButton("Limpar");
+		btnLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		GridBagConstraints gbc_btnLimpar = new GridBagConstraints();
 		gbc_btnLimpar.anchor = GridBagConstraints.NORTH;
 		gbc_btnLimpar.fill = GridBagConstraints.HORIZONTAL;
@@ -129,9 +136,14 @@ public class CadCliente extends JPanel {
 		add(btnLimpar, gbc_btnLimpar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
 		gbc_btnCancelar.anchor = GridBagConstraints.NORTHWEST;
-		gbc_btnCancelar.gridx = 4;
+		gbc_btnCancelar.gridx = 3;
 		gbc_btnCancelar.gridy = 6;
 		add(btnCancelar, gbc_btnCancelar);
 
