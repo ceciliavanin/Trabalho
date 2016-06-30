@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Insets;
 
+@SuppressWarnings("serial")
 public class Venda extends JPanel {
 	private JTextField tfData;
 	private JTextField tfId;
@@ -91,6 +92,9 @@ public class Venda extends JPanel {
 		JButton btnPesquisar = new JButton("Pesquisar");
 		btnPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ConsultaCliente consulta =  new ConsultaCliente();
+				consulta.setVisible(true);
+				
 			}
 		});
 		GridBagConstraints gbc_btnPesquisar = new GridBagConstraints();
@@ -204,6 +208,6 @@ public class Venda extends JPanel {
 		gbc_btnCancelar.gridx = 3;
 		gbc_btnCancelar.gridy = 9;
 		add(btnCancelar, gbc_btnCancelar);
-
+		
 	}
 }

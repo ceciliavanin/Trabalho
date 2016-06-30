@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 import br.univel.Cliente;
-import br.univel.Produto;
+import br.univel.Tabela;
 
 public class ConexaoBanco {
 
@@ -40,6 +40,7 @@ public class ConexaoBanco {
 		try {
 			Class.forName("org.h2.Driver");
 			con = DriverManager.getConnection(url, login, password);
+			System.out.println(url+"\n"+login+"\n"+password);
 			return con;
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -50,7 +51,7 @@ public class ConexaoBanco {
 		}
 	}
 
-	protected String getCreateTable(Object obj) throws SQLException {
+	public String getCreateTable(Object obj) throws SQLException {
 		Class<? extends Object> cl = obj.getClass();
 		try {
 
@@ -275,49 +276,42 @@ public class ConexaoBanco {
 
 
 	
-	protected PreparedStatement getSqlSelectAll(Connection con, Object obj) {
-		Class<? extends Object> cl = obj.getClass();
-
+	public PreparedStatement getSqlSelectAll(Connection con, Object obj) {
+		Class<?> cl = obj.getClass();
 		StringBuilder sb = new StringBuilder();
-		
-		{
-			String nomeTabela;
-			if (cl.isAnnotationPresent(Tabela.class)) {
+		String nomeTabela;
+		if (cl.isAnnotationPresent(Tabela.class)) {
 
-				Tabela anotacaoTabela = cl.getAnnotation(Tabela.class);
-				nomeTabela = anotacaoTabela.value();
+			Tabela anotacaoTabela = cl.getAnnotation(Tabela.class);
+			nomeTabela = anotacaoTabela.value();
 
-			} else {
-				nomeTabela = cl.getSimpleName().toUpperCase();
+		} else {
+			nomeTabela = cl.getSimpleName().toUpperCase();
 
-			}
-			sb.append("SELECT * FROM ").append(nomeTabela).append(";");
 		}
-
+		sb.append("SELECT * FROM ").append(nomeTabela);
 		String strSql = sb.toString();
-
+		System.out.println("SQL GERADO: " + strSql);
 		PreparedStatement ps = null;
-		try {
+		
+		try{
 			ps = con.prepareStatement(strSql);
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 		}
-
+		
 		return ps;
-
 	}
 	public static void main(String[] args) {
 		try {
-			new ConexaoBanco().abrirConexao();
+			Connection con = new ConexaoBanco().abrirConexao();
 			new ConexaoBanco().getCreateTable(new Cliente());
+			new ConexaoBanco().getSqlSelectAll(con ,new Cliente());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

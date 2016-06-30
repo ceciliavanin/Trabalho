@@ -7,6 +7,8 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import br.univel.view.ImportarXml;
+
 public class LerXML {
 
 	public boolean LerXml(Object obj) {
@@ -20,7 +22,7 @@ public class LerXML {
 			
 			return true;
 		} catch (JAXBException e) {
-			e.printStackTrace();
+			
 			return false;
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

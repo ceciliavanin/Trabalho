@@ -1,17 +1,12 @@
 package br.univel.view;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import br.univel.Cliente;
-import br.univel.GravaXml;
 import br.univel.LerXML;
 import br.univel.Produto;
-
 import java.awt.GridBagLayout;
 import javax.swing.JRadioButton;
 import java.awt.GridBagConstraints;
@@ -26,7 +21,7 @@ import java.awt.event.ActionEvent;
 public class ImportarXml extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField tfLocal;
 
 	/**
 	 * Launch the application.
@@ -84,14 +79,14 @@ public class ImportarXml extends JFrame {
 		gbc_lblLocalDoArquivo.gridy = 2;
 		contentPane.add(lblLocalDoArquivo, gbc_lblLocalDoArquivo);
 		
-		textField = new JTextField();
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.insets = new Insets(0, 0, 5, 0);
-		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField.gridx = 5;
-		gbc_textField.gridy = 2;
-		contentPane.add(textField, gbc_textField);
-		textField.setColumns(10);
+		tfLocal = new JTextField();
+		GridBagConstraints gbc_tfLocal = new GridBagConstraints();
+		gbc_tfLocal.insets = new Insets(0, 0, 5, 0);
+		gbc_tfLocal.fill = GridBagConstraints.HORIZONTAL;
+		gbc_tfLocal.gridx = 5;
+		gbc_tfLocal.gridy = 2;
+		contentPane.add(tfLocal, gbc_tfLocal);
+		tfLocal.setColumns(10);
 		
 		JRadioButton rdbtnVenda = new JRadioButton("Venda");
 		GridBagConstraints gbc_rdbtnVenda = new GridBagConstraints();
@@ -118,9 +113,15 @@ public class ImportarXml extends JFrame {
 					g.LerXml(Produto.class);
 					JOptionPane.showMessageDialog(rootPane, "Arquivo importado com sucesso\nLocal: C:/Users/Vanessa/git/Trabalho/Trabalho154143!");
 
-				}else {
-					JOptionPane.showMessageDialog(rootPane, "Selecionar uma opção para exportar!");
+				}else  {
+					if (tfLocal.getText()==null){
+						JOptionPane.showMessageDialog(rootPane, "Informe o local do arquivo!");
+
+					}else {
+						JOptionPane.showMessageDialog(rootPane, "Selecionar uma opção para exportar!");
+					}
 				}
+				
 			}
 			
 		});

@@ -1,8 +1,6 @@
 package br.univel.view;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -18,6 +16,10 @@ import java.awt.event.ActionListener;
 
 public class Principal extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1974197792450071493L;
 	private JPanel contentPane;
 	private JTabbedPane tabbedPane;
 	/**
@@ -42,7 +44,7 @@ public class Principal extends JFrame {
 	 */
 	public Principal() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 690, 372);
+		setBounds(100, 100, 803, 511);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -85,6 +87,17 @@ public class Principal extends JFrame {
 
 		});
 		
+		JMenuItem mntmCadastrarVenda = new JMenuItem("Cadastrar Venda");
+		mnCadastro.add(mntmCadastrarVenda);
+		mntmCadastrarVenda.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+				TelaVenda();
+			}
+
+		});
+
+		
 		JMenu mnFerramentas = new JMenu("Ferramentas");
 		menuBar.add(mnFerramentas);
 		
@@ -95,6 +108,7 @@ public class Principal extends JFrame {
 		mnImportar.add(mntmArquivoXml);
 		mntmArquivoXml.addActionListener(new ActionListener() {
 			
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {
 				ImportarXml ex = new ImportarXml();
 				ex.show();
@@ -105,6 +119,7 @@ public class Principal extends JFrame {
 		mnImportar.add(mntmArquivoBinario);
 		mntmArquivoBinario.addActionListener(new ActionListener() {
 			
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {
 				ImportarBinario ex = new ImportarBinario();
 				ex.show();
@@ -121,6 +136,7 @@ public class Principal extends JFrame {
 		mnExportar.add(mntmArquivoBinario_1);
 		mntmArquivoBinario_1.addActionListener(new ActionListener() {
 			
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {
 				ExportaBinario ex = new ExportaBinario();
 				ex.show();
@@ -134,6 +150,7 @@ public class Principal extends JFrame {
 		mnExportar.add(mntmArquivoXml_1);
 		mntmArquivoXml_1.addActionListener(new ActionListener() {
 			
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {
 				ExportaXml ex = new ExportaXml();
 				ex.show();
@@ -179,7 +196,20 @@ public class Principal extends JFrame {
 		mostra();
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 	}
-	
+	private void TelaVenda() {
+		titulo = "Venda";
+		for (int i = 0; i < tabbedPane.getTabCount(); i++){
+			if (tabbedPane.getTitleAt(i).equals(titulo)){
+				tabbedPane.setSelectedIndex(i);
+				return;
+			}
+			
+		}
+		Venda telaVenda = new Venda();
+		tabbedPane.addTab(titulo , telaVenda);
+		mostra();
+		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+	}
 
 	private void TelaCliente() {
 		titulo = "Cliente";

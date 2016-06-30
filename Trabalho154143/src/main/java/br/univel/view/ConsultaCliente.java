@@ -2,14 +2,17 @@ package br.univel.view;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import java.awt.GridBagLayout;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import br.univel.Cliente;
+import br.univel.ExecutaBanco;
+import br.univel.model.ClienteModel;
+import java.util.List;
 
 public class ConsultaCliente extends JFrame {
-
+	JTable table;
 	private JPanel contentPane;
 
 	/**
@@ -35,14 +38,22 @@ public class ConsultaCliente extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 605, 395);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout());
+		JScrollPane jsc = new JScrollPane();
+		table = new JTable();
+		jsc.setViewportView(table);		
+		contentPane.add(jsc, BorderLayout.CENTER);
 		setContentPane(contentPane);
-		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[]{0};
-		gbl_contentPane.rowHeights = new int[]{0};
-		gbl_contentPane.columnWeights = new double[]{Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{Double.MIN_VALUE};
-		contentPane.setLayout(gbl_contentPane);
+		listarClientes();
+		
+	}
+	
+	protected void listarClientes(){
+
+		List<Cliente> listaCliente = new ExecutaBanco().listarTodosClientes();
+		 ClienteModel cm = new ClienteModel(listaCliente);
+		table.setModel(cm);
+		
 	}
 
 }
