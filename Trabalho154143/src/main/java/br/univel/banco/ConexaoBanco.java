@@ -5,15 +5,15 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Properties;
-
 import br.univel.Cliente;
-import br.univel.Tabela;
-
+import br.univel.banco.Coluna;
+import br.univel.banco.Tabela;
 public class ConexaoBanco {
 
 	private Connection con;
@@ -27,20 +27,19 @@ public class ConexaoBanco {
 	}
 
 	public Connection abrirConexao() throws IOException {
-		String login;
 		String url;
+		String user;
 		String password;
 
 		Properties prop = getProp();
 
-		login = prop.getProperty("prop.server.login");
 		url = prop.getProperty("prop.server.url");
+		user = prop.getProperty("prop.server.user");
 		password = prop.getProperty("prop.server.password");
 
 		try {
 			Class.forName("org.h2.Driver");
-			con = DriverManager.getConnection(url, login, password);
-			System.out.println(url+"\n"+login+"\n"+password);
+			con = DriverManager.getConnection(url, user, password);
 			return con;
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -51,113 +50,115 @@ public class ConexaoBanco {
 		}
 	}
 
-	public String getCreateTable(Object obj) throws SQLException {
-		Class<? extends Object> cl = obj.getClass();
-		try {
+	public PreparedStatement getCreateTable(Object obj, Connection con) throws SQLException {
+			Class<?> cl = obj.getClass();
+			try {
 
-			StringBuilder sb = new StringBuilder();
-			
-			{
-				String nomeTabela;
-				if (cl.isAnnotationPresent(Tabela.class)) {
+				StringBuilder sb = new StringBuilder();
 
-					Tabela anotacaoTabela = cl.getAnnotation(Tabela.class);
-					nomeTabela = anotacaoTabela.value();
+					String nomeTabela;
+					if (cl.isAnnotationPresent(Tabela.class)) {
+						Tabela anotacaoTabela = cl.getAnnotation(Tabela.class);
+						nomeTabela = anotacaoTabela.value();
+					} else {
+						nomeTabela = cl.getSimpleName().toUpperCase();
+					}
+					
+					sb.append("CREATE TABLE ").append(nomeTabela).append("(");
 
-				} else {
-					nomeTabela = cl.getSimpleName().toUpperCase();
+				Field[] atributos = cl.getDeclaredFields();
 
-				}
-				sb.append("CREATE TABLE ").append(nomeTabela).append(" (");
-			}
-
-			Field[] atributos = cl.getDeclaredFields();
-
-			{
 				for (int i = 0; i < atributos.length; i++) {
 
-					Field field = atributos[i];
+						Field field = atributos[i];
 
-					String nomeColuna;
-					String tipoColuna = null;
-					int tamanhoColuna;
-					Coluna anotacaoColuna = null;
-					if (field.isAnnotationPresent(Coluna.class)) {
-						anotacaoColuna = field.getAnnotation(Coluna.class);
+						String nomeColuna;
+						String tipoColuna = null;
 
-						if (anotacaoColuna.nome().isEmpty()) {
-							nomeColuna = field.getName().toUpperCase();
-						} else {
-							nomeColuna = anotacaoColuna.nome();
-						}
-
-					} else {
-						nomeColuna = field.getName().toUpperCase();
-					}
-
-					Class<?> tipoParametro = field.getType();
-
-					if (tipoParametro.equals(String.class)) {
-							tamanhoColuna = anotacaoColuna.tamanho();
-							tipoColuna = "VARCHAR("+tamanhoColuna+")";
-						
-					}else if (tipoParametro.equals(int.class)) {
-						tipoColuna = "INT";
-					}
-					else {
-						tipoColuna = "DESCONHECIDO";
-					}
-
-					if (i > 0) {
-						sb.append(",");
-					}
-
-					sb.append("\n\t").append(nomeColuna).append(' ').append(tipoColuna);
-				}
-			}
-
-			{
-
-				sb.append(",\n\tPRIMARY KEY( ");
-
-				for (int i = 0, achou = 0; i < atributos.length; i++) {
-
-					Field field = atributos[i];
-					if (field.isAnnotationPresent(Coluna.class)) {
-
-						Coluna anotacaoColuna = field.getAnnotation(Coluna.class);
-
-						if (anotacaoColuna.pk()) {
-
-							if (achou > 0) {
-								sb.append(", ");
-							}
+						if (field.isAnnotationPresent(Coluna.class)) {
+							Coluna anotacaoColuna = field.getAnnotation(Coluna.class);
 
 							if (anotacaoColuna.nome().isEmpty()) {
-								sb.append(field.getName().toUpperCase());
+								nomeColuna = field.getName().toUpperCase();
 							} else {
-								sb.append(anotacaoColuna.nome());
+								nomeColuna = anotacaoColuna.nome();
 							}
 
-							achou++;
+						} else {
+							nomeColuna = field.getName().toUpperCase();
 						}
 
+						Class<?> tipoParametro = field.getType();
+
+						if (tipoParametro.equals(String.class)) {
+							tipoColuna = "VARCHAR(100)";
+
+						} else if (tipoParametro.equals(int.class)) {
+							tipoColuna = "INT";
+						} else if (tipoParametro.equals(BigDecimal.class)){
+							tipoColuna = "DOUBLE";
+						}
+
+						if (i > 0) {
+							sb.append(",");
+						}
+
+						sb.append(nomeColuna).append(' ').append(tipoColuna);
 					}
+
+					sb.append(", PRIMARY KEY( ");
+
+					for (int i = 0, achou = 0; i < atributos.length; i++) {
+
+						Field field = atributos[i];
+
+						if (field.isAnnotationPresent(Coluna.class)) {
+
+							Coluna anotacaoColuna = field.getAnnotation(Coluna.class);
+
+							if (anotacaoColuna.pk()) {
+
+								if (achou > 0) {
+									sb.append(", ");
+								}
+
+								if (anotacaoColuna.nome().isEmpty()) {
+									sb.append(field.getName().toUpperCase());
+								} else {
+									sb.append(anotacaoColuna.nome());
+								}
+
+								achou++;
+							}
+
+						}
+					}
+
+					sb.append(" )");
+				
+				sb.append(" );");
+				String strSql = sb.toString();
+				System.out.println("SQL GERADO: " + strSql);
+
+				PreparedStatement ps = null;
+				try {
+					ps = con.prepareStatement(strSql);
+
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} catch (IllegalArgumentException e) {
+					e.printStackTrace();
 				}
 
-				sb.append(" )");
+				return ps;
+			} catch (SecurityException e) {
+				throw new RuntimeException(e);
 			}
-
-			sb.append("\n);");
-			return sb.toString();
-
-		} catch (SecurityException e) {
-			throw new RuntimeException(e);
-			
 		}
-	
-	}
 
+		
+		
+		
 	public PreparedStatement getSqlInsert(Connection con, Object obj) {
 
 		Class<? extends Object> cl = obj.getClass();
@@ -304,14 +305,12 @@ public class ConexaoBanco {
 		
 		return ps;
 	}
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLException {
 		try {
 			Connection con = new ConexaoBanco().abrirConexao();
-			new ConexaoBanco().getCreateTable(new Cliente());
-			new ConexaoBanco().getSqlSelectAll(con ,new Cliente());
+			new ConexaoBanco().getCreateTable(new Cliente(), con);
+			//new ConexaoBanco().getSqlSelectAll(con ,new Cliente());
 		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}

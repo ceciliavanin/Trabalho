@@ -13,8 +13,6 @@ public class Cliente implements Serializable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 4915334596112038L;
-	
 	@Coluna (nome="CadId", pk=true)
 	int id;
 	
