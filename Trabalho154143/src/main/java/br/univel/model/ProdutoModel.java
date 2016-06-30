@@ -16,34 +16,33 @@ public class ProdutoModel extends AbstractTableModel{
 		this.lista = lista;
 	}
 	
-	@Override
 	public int getColumnCount(){
 		return 3;
 	}
 	
-	@Override
+
 	public int getRowCount(){
 		return lista.size();
 	}
 	
-	@Override
+
 	public String getColumnName(int col){
 		
 		switch(col){
 		
 			case 0:
-				return "Código";
+				return "CÃ³digo";
 			case 1:
-				return "Descrição";
+				return "DescriÃ§Ã£o";
 			case 2:
-				return "Preço";
+				return "PreÃ§o";
 				
 		}
 		
 		return null;
 	}
 	
-	@Override
+
 	public Object getValueAt(int row, int col){
 		
 		Produto p = lista.get(row);
@@ -55,7 +54,7 @@ public class ProdutoModel extends AbstractTableModel{
 			case 1:
 				return p.getDescricao();
 			case 2:
-				return p.getPreco();
+				return p.getValor();
 				
 		}
 		

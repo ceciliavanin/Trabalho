@@ -6,13 +6,9 @@ import java.util.Date;
 public class Venda {
 	int id;
 	Date data ;
+	int qnt;
 	BigDecimal valortotal;
 	BigDecimal valortroco;
-
-	public Venda(){
-		
-	}
-	
 	public int getId() {
 		return id;
 	}
@@ -24,6 +20,12 @@ public class Venda {
 	}
 	public void setData(Date data) {
 		this.data = data;
+	}
+	public int getQnt() {
+		return qnt;
+	}
+	public void setQnt(int qnt) {
+		this.qnt = qnt;
 	}
 	public BigDecimal getValortotal() {
 		return valortotal;
@@ -37,13 +39,18 @@ public class Venda {
 	public void setValortroco(BigDecimal valortroco) {
 		this.valortroco = valortroco;
 	}
-	public Venda(int id, Date data, BigDecimal valortotal, BigDecimal valortroco) {
+	public Venda(int id, Date data, int qnt, BigDecimal valortotal, BigDecimal valortroco) {
 		super();
 		this.id = id;
 		this.data = data;
+		this.qnt = qnt;
 		this.valortotal = valortotal;
 		this.valortroco = valortroco;
 	}
+	public Venda() {
+		
+	}
+
 	
 
 }
