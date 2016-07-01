@@ -165,7 +165,7 @@ public class Principal extends JFrame {
 			
 			public void actionPerformed(ActionEvent arg0) {
 				Relatorio relatorio = new Relatorio();
-				relatorio.show();
+				relatorio.setVisible(true);
 			}
 
 		});	

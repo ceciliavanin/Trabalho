@@ -102,24 +102,17 @@ public class ImportarXml extends JFrame {
 				LerXML g = new LerXML();
 				if (rdbtnVenda.isSelected()){
 					g.LerXml(Venda.class);
-					JOptionPane.showMessageDialog(rootPane, "Arquivo importado com sucesso\nLocal: C:/Users/Vanessa/git/Trabalho/Trabalho154143!");
+					JOptionPane.showMessageDialog(rootPane, "Arquivo importado com sucesso!");
 
 				}
 				else if (rdbtnCliente.isSelected()){
 					g.LerXml(Cliente.class);
-					JOptionPane.showMessageDialog(rootPane, "Arquivo imporatdo com sucesso\nLocal: C:/Users/Vanessa/git/Trabalho/Trabalho154143!");
+					JOptionPane.showMessageDialog(rootPane, "Arquivo importado com sucesso!");
 
 				}else if (rdbtnProduto.isSelected()){
 					g.LerXml(Produto.class);
-					JOptionPane.showMessageDialog(rootPane, "Arquivo importado com sucesso\nLocal: C:/Users/Vanessa/git/Trabalho/Trabalho154143!");
-
-				}else  {
-					if (tfLocal.getText()==null){
-						JOptionPane.showMessageDialog(rootPane, "Informe o local do arquivo!");
-
-					}else {
-						JOptionPane.showMessageDialog(rootPane, "Selecionar uma opção para exportar!");
-					}
+					JOptionPane.showMessageDialog(rootPane, "Arquivo importado com sucesso!");
+					
 				}
 				
 			}

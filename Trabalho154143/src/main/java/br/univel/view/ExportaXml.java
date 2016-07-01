@@ -89,16 +89,16 @@ public class ExportaXml extends JFrame {
 				GravaXml g = new GravaXml();
 				if (rdbtnVenda.isSelected()){
 					g.gravaXml(Venda.class);
-					JOptionPane.showMessageDialog(rootPane, "Arquivo exportado com sucesso\nLocal: C:/Users/Vanessa/git/Trabalho/Trabalho154143!");
+					JOptionPane.showMessageDialog(rootPane, "Arquivo exportado com sucesso!");
 
 				}
 				else if (rdbtnCliente.isSelected()){
 					g.gravaXml(Cliente.class);
-					JOptionPane.showMessageDialog(rootPane, "Arquivo exportado com sucesso\nLocal: C:/Users/Vanessa/git/Trabalho/Trabalho154143!");
+					JOptionPane.showMessageDialog(rootPane, "Arquivo exportado com sucesso!");
 
 				}else if (rdbtnProduto.isSelected()){
 					g.gravaXml(Produto.class);
-					JOptionPane.showMessageDialog(rootPane, "Arquivo exportado com sucesso\nLocal: C:/Users/Vanessa/git/Trabalho/Trabalho154143!");
+					JOptionPane.showMessageDialog(rootPane, "Arquivo exportado com sucesso!");
 
 				}else {
 					JOptionPane.showMessageDialog(rootPane, "Selecionar uma opção para exportar!");

@@ -90,18 +90,18 @@ public class ExportaBinario extends JFrame {
 				if (rdbtnVenda.isSelected()){
 					File f = new File("Venda");
 					s.gravar(Venda.class, f);
-					JOptionPane.showMessageDialog(rootPane, "Arquivo exportado com sucesso\nLocal: C:/Users/Vanessa/git/Trabalho/Trabalho154143!");
+					JOptionPane.showMessageDialog(rootPane, "Arquivo exportado com sucesso!");
 
 				}
 				else if (rdbtnCliente.isSelected()){
 					File f = new File("Cliente");
 					s.gravar(Venda.class, f);
-					JOptionPane.showMessageDialog(rootPane, "Arquivo exportado com sucesso\nLocal: C:/Users/Vanessa/git/Trabalho/Trabalho154143!");
+					JOptionPane.showMessageDialog(rootPane, "Arquivo exportado com sucesso!");
 
 				}else if (rdbtnProduto.isSelected()){
 					File f = new File("Produto");
 					s.gravar(Venda.class, f);
-					JOptionPane.showMessageDialog(rootPane, "Arquivo exportado com sucesso\nLocal: C:/Users/Vanessa/git/Trabalho/Trabalho154143!");
+					JOptionPane.showMessageDialog(rootPane, "Arquivo exportado com sucesso!");
 
 				}else {
 					JOptionPane.showMessageDialog(rootPane, "Selecionar uma opção para exportar!");

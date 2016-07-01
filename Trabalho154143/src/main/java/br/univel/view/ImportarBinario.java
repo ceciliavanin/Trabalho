@@ -74,23 +74,6 @@ public class ImportarBinario extends JFrame {
 		gbc_rdbtnProduto.gridy = 2;
 		contentPane.add(rdbtnProduto, gbc_rdbtnProduto);
 
-		JLabel lblLocalDoArquivo = new JLabel("Local do Arquivo");
-		GridBagConstraints gbc_lblLocalDoArquivo = new GridBagConstraints();
-		gbc_lblLocalDoArquivo.anchor = GridBagConstraints.EAST;
-		gbc_lblLocalDoArquivo.insets = new Insets(0, 0, 5, 5);
-		gbc_lblLocalDoArquivo.gridx = 3;
-		gbc_lblLocalDoArquivo.gridy = 2;
-		contentPane.add(lblLocalDoArquivo, gbc_lblLocalDoArquivo);
-
-		Local = new JTextField();
-		GridBagConstraints gbc_Local = new GridBagConstraints();
-		gbc_Local.insets = new Insets(0, 0, 5, 0);
-		gbc_Local.fill = GridBagConstraints.HORIZONTAL;
-		gbc_Local.gridx = 4;
-		gbc_Local.gridy = 2;
-		contentPane.add(Local, gbc_Local);
-		Local.setColumns(10);
-
 		JRadioButton rdbtnVenda = new JRadioButton("Venda");
 		GridBagConstraints gbc_rdbtnVenda = new GridBagConstraints();
 		gbc_rdbtnVenda.insets = new Insets(0, 0, 5, 5);
@@ -108,20 +91,17 @@ public class ImportarBinario extends JFrame {
 				if (rdbtnVenda.isSelected()) {
 					s.gravar(Venda.class, f);
 					JOptionPane.showMessageDialog(rootPane,
-							"Arquivo importado com sucesso\nLocal: C:/Users/Vanessa/git/Trabalho/Trabalho154143!");
+							"Arquivo importado com sucesso!");
 
 				} else if (rdbtnCliente.isSelected()) {
 					s.gravar(Venda.class, f);
 					JOptionPane.showMessageDialog(rootPane,
-							"Arquivo importado com sucesso\nLocal: C:/Users/Vanessa/git/Trabalho/Trabalho154143!");
+							"Arquivo importado com sucesso!");
 
 				} else if (rdbtnProduto.isSelected()) {
 					s.gravar(Venda.class, f);
 					JOptionPane.showMessageDialog(rootPane,
-							"Arquivo importado com sucesso\nLocal: C:/Users/Vanessa/git/Trabalho/Trabalho154143!");
-
-				} else {
-					JOptionPane.showMessageDialog(rootPane, "Selecionar uma opção para exportar!");
+						"Arquivo importado com sucesso!");
 				}
 
 			}
