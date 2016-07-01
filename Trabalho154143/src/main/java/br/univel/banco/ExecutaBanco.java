@@ -65,10 +65,10 @@ public class ExecutaBanco {
 				result = psListar.executeQuery();
 				while (result.next()) {
 					int id = result.getInt(1);
-					String nome = result.getString("nome");
-					String cidade = result.getString("cidade");
-					String estado = result.getString("estado");
-					String telefone = result.getString("telefone");
+					String nome = result.getString(2);
+					String cidade = result.getString(3);
+					String estado = result.getString(4);
+					String telefone = result.getString(5);
 					ListCliente.add(new Cliente(id,nome,cidade,estado,telefone));
 				}
 			}finally{

@@ -11,7 +11,6 @@ public class ExecutaColetora{
 	public static void main(String[] args) {
 		new ExecutaColetora().lerProduto();
 		new ExecutaColetora().lerCliente();
-		new ExecutaColetora().executaSerializable();
 	}
 	
 	public void executaSerializable(){

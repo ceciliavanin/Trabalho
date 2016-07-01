@@ -13,19 +13,19 @@ public class Cliente implements Serializable{
 	/**
 	 * 
 	 */
-	@Coluna (nome="CADID", pk=true)
+	@Coluna (nome = "id", pk=true)
 	int id;
 	
-	@Coluna (nome="CadNome", tamanho=50)
+	@Coluna (nome="nome", tamanho=50)
 	String nome;
 
-	@Coluna (nome="CadCidade", tamanho=30)
+	@Coluna (nome="cidade", tamanho=30)
 	String cidade;
 	
-	@Coluna (nome="CadEstado", tamanho=30)
+	@Coluna (nome="estado", tamanho=30)
 	String estado;
 	
-	@Coluna (nome="CadTelefone", tamanho=10)
+	@Coluna (nome="telefone", tamanho=15)
 	String telefone;
 	
 	public Cliente() {

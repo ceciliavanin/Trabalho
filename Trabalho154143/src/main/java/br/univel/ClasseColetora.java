@@ -35,15 +35,7 @@ public class ClasseColetora {
 				Matcher m = p.matcher(e);
 				if(m.matches()){
 					listProduto.add(getProduto(e));
-					ConexaoBanco c = new ConexaoBanco();
-					 Connection con;
-					try {
-						con = c.abrirConexao();
-						 PreparedStatement ps = c.getSqlInsert(con, listProduto);
 
-					} catch (Exception e1) {
-						e1.printStackTrace();
-					}
 				}
 			}
 		});
@@ -79,6 +71,14 @@ public class ClasseColetora {
 		}
 
 		Produto p = new Produto(id, descricao, preco);
+		ConexaoBanco c = new ConexaoBanco();
+		Connection con;
+		try {
+			con = c.abrirConexao();
+			 PreparedStatement ps = c.getSqlInsert(con, p);
+		}catch(IOException e){
+			
+		}	 
 		return p;
 	}
 	
@@ -128,14 +128,18 @@ public class ClasseColetora {
 
 		Cliente c = new Cliente(id, nome, cidade, estado, telefone);
 		ConexaoBanco co = new ConexaoBanco();
-		 Connection con;
+		Connection con;
 		try {
 			con = co.abrirConexao();
-			 PreparedStatement ps = co.getSqlInsert(con, c);
-
+			PreparedStatement ps = co.getSqlInsert(con, c);
+			ps.executeUpdate();
+			ps.close();
+		    con.close();
+			 			 					
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
+		
 		return c;
 	}
 	public boolean VerificarArquivo(String str){

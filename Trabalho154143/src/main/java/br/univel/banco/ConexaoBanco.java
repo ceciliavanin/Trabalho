@@ -15,6 +15,7 @@ import java.util.Properties;
 import br.univel.Cliente;
 import br.univel.banco.Coluna;
 import br.univel.banco.Tabela;
+
 public class ConexaoBanco {
 
 	private Connection con;
@@ -56,7 +57,7 @@ public class ConexaoBanco {
 		try {
 
 			StringBuilder sb = new StringBuilder();
-			
+
 			{
 				String nomeTabela;
 				if (cl.isAnnotationPresent(Tabela.class)) {
@@ -65,7 +66,7 @@ public class ConexaoBanco {
 					nomeTabela = anotacaoTabela.value();
 
 				} else {
-					nomeTabela = cl.getSimpleName().toUpperCase();
+					nomeTabela = cl.getSimpleName();
 
 				}
 				sb.append("CREATE TABLE ").append(nomeTabela).append(" (");
@@ -92,19 +93,19 @@ public class ConexaoBanco {
 						}
 
 					} else {
-						nomeColuna = field.getName().toUpperCase();
+						nomeColuna = field.getName();
 					}
 
 					Class<?> tipoParametro = field.getType();
 
 					if (tipoParametro.equals(String.class)) {
-							tamanhoColuna = anotacaoColuna.tamanho();
-							tipoColuna = "VARCHAR("+tamanhoColuna+")";
-						
-					}else if (tipoParametro.equals(int.class)) {
+						tamanhoColuna = anotacaoColuna.tamanho();
+						tipoColuna = "VARCHAR(" + tamanhoColuna + ")";
+
+					} else if (tipoParametro.equals(int.class)) {
 						tipoColuna = "INT";
 
-					}else {
+					} else {
 						tipoColuna = "DESCONHECIDO";
 					}
 
@@ -153,11 +154,11 @@ public class ConexaoBanco {
 
 		} catch (SecurityException e) {
 			throw new RuntimeException(e);
-			
+
 		}
-	
+
 	}
-		
+
 	public PreparedStatement getSqlInsert(Connection con, Object obj) {
 
 		Class<? extends Object> cl = obj.getClass();
@@ -191,13 +192,13 @@ public class ConexaoBanco {
 					Coluna anotacaoColuna = field.getAnnotation(Coluna.class);
 
 					if (anotacaoColuna.nome().isEmpty()) {
-						nomeColuna = field.getName().toUpperCase();
+						nomeColuna = field.getName();
 					} else {
 						nomeColuna = anotacaoColuna.nome();
 					}
 
 				} else {
-					nomeColuna = field.getName().toUpperCase();
+					nomeColuna = field.getName();
 				}
 
 				if (i > 0) {
@@ -219,12 +220,12 @@ public class ConexaoBanco {
 		sb.append(')');
 
 		String strSql = sb.toString();
-		
+
 		try {
 			PreparedStatement ps = con.prepareStatement(strSql);
 
 			for (int i = 0; i < atributos.length; i++) {
-				
+
 				Field field = atributos[i];
 
 				field.setAccessible(true);
@@ -235,19 +236,19 @@ public class ConexaoBanco {
 				} else if (field.getType().equals(String.class)) {
 					ps.setString(i + 1, String.valueOf(field.get(obj)));
 
-                } else if (field.getType().isEnum()) {
-                    Object valor = field.get(obj);
-                    Method m = valor.getClass().getMethod("ordinal");
-                    ps.setInt(i + 1, (Integer) m.invoke(valor, null));
-				                
-					} else {
+				} else if (field.getType().isEnum()) {
+					Object valor = field.get(obj);
+					Method m = valor.getClass().getMethod("ordinal");
+					ps.setInt(i + 1, (Integer) m.invoke(valor, null));
+
+				} else {
 					throw new RuntimeException("Tipo não suportado, falta implementar.");
 
 				}
 			}
 			return ps;
 
-		}catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
 
@@ -271,11 +272,9 @@ public class ConexaoBanco {
 			return null;
 
 		}
-		
+
 	}
 
-
-	
 	public PreparedStatement getSqlSelectAll(Connection con, Object obj) {
 		Class<?> cl = obj.getClass();
 		StringBuilder sb = new StringBuilder();
@@ -293,37 +292,20 @@ public class ConexaoBanco {
 		String strSql = sb.toString();
 		System.out.println("SQL GERADO: " + strSql);
 		PreparedStatement ps = null;
-		
-		try{
+
+		try {
 			ps = con.prepareStatement(strSql);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 		}
-		
+
 		return ps;
 	}
-	public static void main(String[] args) throws SQLException {
-		new ConexaoBanco(); 
-	}
-
-	public ConexaoBanco() {
-		try {
-	        Connection con = abrirConexao();
-	        Cliente c = new Cliente();
-            PreparedStatement ps = getSqlSelectAll(con, c);
-            ResultSet resultado = ps.executeQuery();
-            resultado.next();
-			
-            ps.close();
-            resultado.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}		
-	}
-}
 
 	
+	public ConexaoBanco() {
+		
+	}
+}
