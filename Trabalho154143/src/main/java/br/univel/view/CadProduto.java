@@ -7,14 +7,20 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JTextField;
+
+import com.sun.javafx.font.freetype.FTFactory;
+
+import br.univel.CadProdutos;
+
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
 import java.awt.event.ActionEvent;
 
 public class CadProduto extends JPanel {
 	private JTextField tfDescricao;
-	private JTextField txtTfpreco;
+	private BigDecimal txtTfpreco;
 
 	/**
 	 * Create the panel.
@@ -75,7 +81,8 @@ public class CadProduto extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				CadProdutos cp = new CadProduto();
+				cp.cadastro(tfDescricao.getText(), txtTfpreco);
 			}
 		}); 
 		GridBagConstraints gbc_btnCadastrar = new GridBagConstraints();

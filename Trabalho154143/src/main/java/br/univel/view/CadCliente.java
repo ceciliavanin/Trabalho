@@ -1,14 +1,21 @@
 package br.univel.view;
 
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+
+import br.univel.CadClientes;
+
 import javax.swing.JButton;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
 public class CadCliente extends JPanel {
@@ -117,8 +124,15 @@ public class CadCliente extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				CadCliente cli = new CadCliente();
-				cli.cadastro();
+				CadClientes cli = new CadClientes();
+				try {
+					cli.cadastro(tfNomeCliente.getText(), tfCidade.getText(), tfEstado.getText(), tfTelefone.getText());
+					JOptionPane.showMessageDialog(rootPane,	"Arquivo importado com sucesso!");
+					} catch (SQLException e1) {
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 				
 			}
 		});
@@ -126,6 +140,7 @@ public class CadCliente extends JPanel {
 		gbc_btnCadastrar.anchor = GridBagConstraints.NORTHEAST;
 		gbc_btnCadastrar.insets = new Insets(0, 0, 0, 5);
 		gbc_btnCadastrar.gridwidth = 2;
+		
 		gbc_btnCadastrar.gridx = 0;
 		gbc_btnCadastrar.gridy = 6;
 		add(btnCadastrar, gbc_btnCadastrar);
