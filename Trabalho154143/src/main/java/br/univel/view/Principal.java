@@ -164,12 +164,36 @@ public class Principal extends JFrame {
 		
 		JMenuItem mntmClientes = new JMenuItem("Clientes");
 		mnRelatrios.add(mntmClientes);
+		mntmClientes.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+				ExportaXml ex = new ExportaXml();
+				ex.show();
+			}
+
+		});
 		
 		JMenuItem mntmProdutos = new JMenuItem("Produtos");
 		mnRelatrios.add(mntmProdutos);
+		mntmProdutos.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+				ExportaXml ex = new ExportaXml();
+				ex.show();
+			}
+
+		});
 		
 		JMenuItem mntmVendas = new JMenuItem("Vendas");
 		mnRelatrios.add(mntmVendas);
+		mntmVendas.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+				ExportaXml ex = new ExportaXml();
+				ex.show();
+			}
+
+		});
 		
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		GridBagConstraints gbc_tabbedPane = new GridBagConstraints();

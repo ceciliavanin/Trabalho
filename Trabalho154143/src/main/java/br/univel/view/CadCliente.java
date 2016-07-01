@@ -146,7 +146,6 @@ public class CadCliente extends JPanel {
 			}
 
 			private void Dispose() {
-				// TODO Auto-generated method stub
 				
 			}
 		});
