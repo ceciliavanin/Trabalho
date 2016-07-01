@@ -20,7 +20,8 @@ import java.awt.event.ActionEvent;
 
 public class CadProduto extends JPanel {
 	private JTextField tfDescricao;
-	private BigDecimal txtTfpreco;
+	private JTextField tfPreco;
+	private BigDecimal txtTfpreco= ;
 
 	/**
 	 * Create the panel.
@@ -82,9 +83,18 @@ public class CadProduto extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				CadProdutos cp = new CadProduto();
-				cp.cadastro(tfDescricao.getText(), txtTfpreco);
+				cp.cadastro(tfDescricao.getText(), tfPreco.getText());
 			}
 		}); 
+		
+		tfPreco = new JTextField();
+		GridBagConstraints gbc_tfPreco = new GridBagConstraints();
+		gbc_tfPreco.insets = new Insets(0, 0, 5, 5);
+		gbc_tfPreco.fill = GridBagConstraints.HORIZONTAL;
+		gbc_tfPreco.gridx = 2;
+		gbc_tfPreco.gridy = 2;
+		add(tfPreco, gbc_tfPreco);
+		tfPreco.setColumns(10);
 		GridBagConstraints gbc_btnCadastrar = new GridBagConstraints();
 		gbc_btnCadastrar.insets = new Insets(0, 0, 0, 5);
 		gbc_btnCadastrar.gridx = 1;

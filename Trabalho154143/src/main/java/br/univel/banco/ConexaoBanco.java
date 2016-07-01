@@ -23,24 +23,15 @@ public class ConexaoBanco {
 
 	private Connection con;
 
-	public static Properties getProp() throws IOException {
-		Properties props = new Properties();
-		FileInputStream file = new FileInputStream("properties/banco.properties");
-		props.load(file);
-		return props;
-
-	}
-
-	public Connection abrirConexao() throws IOException {
+		public Connection abrirConexao() throws IOException {
 		String url;
 		String user;
 		String password;
 
-		Properties prop = getProp();
 
-		url = prop.getProperty("prop.server.url");
-		user = prop.getProperty("prop.server.user");
-		password = prop.getProperty("prop.server.password");
+		url = "jdbc:h2:~/database";
+		user = "sa";
+		password = "sa";
 
 		try {
 			Class.forName("org.h2.Driver");

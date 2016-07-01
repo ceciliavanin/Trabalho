@@ -15,12 +15,18 @@ import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import java.awt.Font;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
 
 public class AdicionaProduto extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtQuantidade;
 	private JTextField textField;
+	private JScrollPane scrollPane;
 	private JTable table;
 
 	/**
@@ -44,15 +50,15 @@ public class AdicionaProduto extends JFrame {
 	 */
 	public AdicionaProduto() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 360);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{26, 117, 18, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_contentPane.columnWeights = new double[]{0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.rowHeights = new int[]{74, 0, 0, 0, 0, 0, 0, 0};
+		gbl_contentPane.columnWeights = new double[]{0.0, 1.0, 0.0, 1.0, 1.0};
+		gbl_contentPane.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
 		JLabel lblDescri = new JLabel("Descri\u00E7\u00E3o");
@@ -73,9 +79,14 @@ public class AdicionaProduto extends JFrame {
 		textField.setColumns(10);
 		
 		JButton btnPesquisar = new JButton("Pesquisar");
+		btnPesquisar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		
 		GridBagConstraints gbc_btnPesquisar = new GridBagConstraints();
-		gbc_btnPesquisar.insets = new Insets(0, 0, 5, 0);
+		gbc_btnPesquisar.insets = new Insets(0, 0, 5, 5);
 		gbc_btnPesquisar.gridx = 3;
 		gbc_btnPesquisar.gridy = 1;
 		contentPane.add(btnPesquisar, gbc_btnPesquisar);
@@ -97,21 +108,22 @@ public class AdicionaProduto extends JFrame {
 		contentPane.add(txtQuantidade, gbc_txtQuantidade);
 		txtQuantidade.setColumns(10);
 		
-		JButton btnAdicionar = new JButton("Adicionar");
-		GridBagConstraints gbc_btnAdicionar = new GridBagConstraints();
-		gbc_btnAdicionar.insets = new Insets(0, 0, 5, 0);
-		gbc_btnAdicionar.gridx = 3;
-		gbc_btnAdicionar.gridy = 4;
-		contentPane.add(btnAdicionar, gbc_btnAdicionar);
+		scrollPane = new JScrollPane();
+		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.gridheight = 3;
+		gbc_scrollPane.gridwidth = 5;
+		gbc_scrollPane.insets = new Insets(0, 0, 5, 0);
+		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.gridx = 0;
+		gbc_scrollPane.gridy = 3;
+		contentPane.add(scrollPane, gbc_scrollPane);
 		
 		table = new JTable();
-		table.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
-				{null, null, null},
 			},
 			new String[] {
-				"C\u00F3digo", "Descri\u00E7\u00E3o", "Valor Unit\u00E1rio"
+				"C\u00F3digo", "Descri\u00E7\u00E3o", "Pre\u00E7o"
 			}
 		) {
 			Class[] columnTypes = new Class[] {
@@ -121,16 +133,14 @@ public class AdicionaProduto extends JFrame {
 				return columnTypes[columnIndex];
 			}
 		});
-		table.getColumnModel().getColumn(0).setPreferredWidth(61);
-		table.getColumnModel().getColumn(1).setPreferredWidth(260);
-		table.getColumnModel().getColumn(2).setPreferredWidth(104);
-		GridBagConstraints gbc_table = new GridBagConstraints();
-		gbc_table.gridwidth = 4;
-		gbc_table.insets = new Insets(0, 0, 5, 0);
-		gbc_table.fill = GridBagConstraints.BOTH;
-		gbc_table.gridx = 0;
-		gbc_table.gridy = 5;
-		contentPane.add(table, gbc_table);
+		scrollPane.setViewportView(table);
+		
+		JButton btnAdicionar = new JButton("Adicionar");
+		GridBagConstraints gbc_btnAdicionar = new GridBagConstraints();
+		gbc_btnAdicionar.insets = new Insets(0, 0, 0, 5);
+		gbc_btnAdicionar.gridx = 3;
+		gbc_btnAdicionar.gridy = 6;
+		contentPane.add(btnAdicionar, gbc_btnAdicionar);
 	}
 
 }

@@ -10,6 +10,7 @@ import br.univel.Cliente;
 import br.univel.banco.ExecutaBanco;
 import br.univel.model.ClienteModel;
 import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 public class ConsultaCliente extends JFrame {
 	JTable table;
@@ -52,7 +53,20 @@ public class ConsultaCliente extends JFrame {
 
 		List<Cliente> listaCliente = new ExecutaBanco().listarTodosClientes();
 		 ClienteModel cm = new ClienteModel(listaCliente);
-		table.setModel(cm);
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"ID", "NOME"
+			}
+		) {
+			boolean[] columnEditables = new boolean[] {
+				false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
 		
 	}
 

@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -122,6 +123,8 @@ public class CadCliente extends JPanel {
 		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.addActionListener(new ActionListener() {
 			
+			private Component rootPane;
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				CadClientes cli = new CadClientes();
