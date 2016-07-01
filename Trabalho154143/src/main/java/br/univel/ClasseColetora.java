@@ -135,6 +135,7 @@ public class ClasseColetora {
 		Connection con;
 		try {
 			con = co.abrirConexao();
+
 			PreparedStatement ps = co.getSqlInsert(con, c);
 			ps.executeUpdate();
 			ps.close();

@@ -1,20 +1,10 @@
-package br.univel.view;
+package br.univel;
 
 import javax.swing.JFrame;
 
-import br.univel.DaoImp;
-import br.univel.ListaProdutos;
-import br.univel.reports.ProdutoJRDataSource;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.view.JasperViewer;
-package br.univel.reports;
-
-import javax.swing.JFrame;
-
-import br.univel.DaoImp;
-import br.univel.ListaProdutos;
-import br.univel.ListaVenda;
+import br.univel.SerIMP;
+import br.univel.Produto;
+import br.univel.Venda;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -29,8 +19,8 @@ public class EmitirRelatorio {
 	public void imprimirProdutos() throws JRException {
 		
 		String arq = "RelatorioProdutos.jasper";
-		SerIMP d = new SerIMP();
-		ListaProdutos dao = new ListaProdutos();
+		 d = new SerIMP();
+		Produto dao = new Produto();
 		ProdutoJRDataSource ds = new ProdutoJRDataSource(dao.getLista());
 		JasperPrint jp = JasperFillManager.fillReport(arq, null,d.getCon());
 		
@@ -47,8 +37,8 @@ public class EmitirRelatorio {
 	public void imprimirVendas() throws JRException {
 		
 		String arq = "RelatorioVendas.jasper";
-		DaoImp d = new DaoImp();
-		ListaVenda dao = new ListaVenda();
+		SerIMP d = new SerIMP();
+		Venda dao = new Venda();
 		VendaJRDataSource ds = new VendaJRDataSource(dao.getLista());
 		JasperPrint jp = JasperFillManager.fillReport(arq, null,d.getCon());
 		
@@ -65,8 +55,8 @@ public class EmitirRelatorio {
 	public void imprimirClientes() throws JRException {
 		
 		String arq = "RelatorioClientes.jasper";		
-		ListaProdutos dao = new ListaProdutos();
-		DaoImp d = new DaoImp();
+		Produto dao = new Produto();
+		SerIMP d = new SerIMP();
 		ProdutoJRDataSource ds = new ProdutoJRDataSource(dao.getLista());
 		JasperPrint jp = JasperFillManager.fillReport(arq, null,d.getCon());
 		
@@ -77,28 +67,6 @@ public class EmitirRelatorio {
 		jasperViewer.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		
 		jasperViewer.setVisible(true);
-		
-	}
-}
-public class EmitirRelatorio {
-
-	public void relCliente(){
-		String arq = "Cliente.jasper";		
-		JasperPrint jp = JasperFillManager.fillReport(arq, null,.getCon());
-		
-		JasperViewer jasperViewer = new JasperViewer(jp);
-		
-		jasperViewer.setBounds(50, 50, 320, 240);
-		jasperViewer.setLocationRelativeTo(null);
-		jasperViewer.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		
-		jasperViewer.setVisible(true);
-		
-	}
-	public void relProduto(){
-		
-	}
-	public void relVenda(){
 		
 	}
 }

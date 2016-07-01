@@ -299,21 +299,19 @@ public class ConexaoBanco {
 
 
 	public ConexaoBanco() {
-//		try {
-//			Connection con = abrirConexao();
-//	        PreparedStatement ps;
-//	        ps = con.prepareStatement(getCreateTable(new Cliente()));
-//
-//			int res = ps.executeUpdate();
-//	        ps = getSqlInsert(con, new Cliente());
-//			ps.executeUpdate();
-//			res = ps.executeUpdate();
-//			con.close();
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
+		try {
+
+			Connection con = abrirConexao();
+	        PreparedStatement ps;
+	        ps = con.prepareStatement(getCreateTable(new Cliente()));
+
+			int res = ps.executeUpdate();
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	public static void main(String[] args) {
 		new ConexaoBanco();
