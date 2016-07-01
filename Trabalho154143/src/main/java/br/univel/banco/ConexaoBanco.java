@@ -290,7 +290,6 @@ public class ConexaoBanco {
 		}
 		sb.append("SELECT * FROM ").append(nomeTabela);
 		String strSql = sb.toString();
-		System.out.println("SQL GERADO: " + strSql);
 		PreparedStatement ps = null;
 
 		try {

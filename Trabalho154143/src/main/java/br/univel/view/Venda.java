@@ -124,6 +124,14 @@ public class Venda extends JPanel {
 		add(tableProdutos, gbc_tableProdutos);
 		
 		JButton btnAdicionar = new JButton("Adicionar");
+		btnPesquisar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AdicionaProduto adiciona =  new AdicionaProduto();
+				adiciona.setVisible(true);
+				
+			}
+		});
+
 		GridBagConstraints gbc_btnAdicionar = new GridBagConstraints();
 		gbc_btnAdicionar.anchor = GridBagConstraints.NORTHWEST;
 		gbc_btnAdicionar.insets = new Insets(0, 0, 5, 0);
