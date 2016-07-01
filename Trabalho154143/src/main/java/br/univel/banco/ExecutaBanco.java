@@ -1,4 +1,4 @@
-package br.univel;
+package br.univel.banco;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -9,7 +9,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.univel.banco.ConexaoBanco;
+import br.univel.Cliente;
+import br.univel.Produto;
 
 public class ExecutaBanco {
 

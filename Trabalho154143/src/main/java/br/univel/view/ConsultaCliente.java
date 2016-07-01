@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import br.univel.Cliente;
-import br.univel.ExecutaBanco;
+import br.univel.banco.ExecutaBanco;
 import br.univel.model.ClienteModel;
 import java.util.List;
 

@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 import br.univel.Cliente;
@@ -50,114 +51,112 @@ public class ConexaoBanco {
 		}
 	}
 
-	public PreparedStatement getCreateTable(Object obj, Connection con) throws SQLException {
-			Class<?> cl = obj.getClass();
-			try {
+	public String getCreateTable(Object obj) throws SQLException {
+		Class<? extends Object> cl = obj.getClass();
+		try {
 
-				StringBuilder sb = new StringBuilder();
+			StringBuilder sb = new StringBuilder();
+			
+			{
+				String nomeTabela;
+				if (cl.isAnnotationPresent(Tabela.class)) {
 
-					String nomeTabela;
-					if (cl.isAnnotationPresent(Tabela.class)) {
-						Tabela anotacaoTabela = cl.getAnnotation(Tabela.class);
-						nomeTabela = anotacaoTabela.value();
-					} else {
-						nomeTabela = cl.getSimpleName().toUpperCase();
-					}
-					
-					sb.append("CREATE TABLE ").append(nomeTabela).append("(");
+					Tabela anotacaoTabela = cl.getAnnotation(Tabela.class);
+					nomeTabela = anotacaoTabela.value();
 
-				Field[] atributos = cl.getDeclaredFields();
+				} else {
+					nomeTabela = cl.getSimpleName().toUpperCase();
 
+				}
+				sb.append("CREATE TABLE ").append(nomeTabela).append(" (");
+			}
+
+			Field[] atributos = cl.getDeclaredFields();
+
+			{
 				for (int i = 0; i < atributos.length; i++) {
 
-						Field field = atributos[i];
+					Field field = atributos[i];
 
-						String nomeColuna;
-						String tipoColuna = null;
+					String nomeColuna;
+					String tipoColuna = null;
+					int tamanhoColuna;
+					Coluna anotacaoColuna = null;
+					if (field.isAnnotationPresent(Coluna.class)) {
+						anotacaoColuna = field.getAnnotation(Coluna.class);
 
-						if (field.isAnnotationPresent(Coluna.class)) {
-							Coluna anotacaoColuna = field.getAnnotation(Coluna.class);
+						if (anotacaoColuna.nome().isEmpty()) {
+							nomeColuna = field.getName().toUpperCase();
+						} else {
+							nomeColuna = anotacaoColuna.nome();
+						}
+
+					} else {
+						nomeColuna = field.getName().toUpperCase();
+					}
+
+					Class<?> tipoParametro = field.getType();
+
+					if (tipoParametro.equals(String.class)) {
+							tamanhoColuna = anotacaoColuna.tamanho();
+							tipoColuna = "VARCHAR("+tamanhoColuna+")";
+						
+					}else if (tipoParametro.equals(int.class)) {
+						tipoColuna = "INT";
+
+					}else {
+						tipoColuna = "DESCONHECIDO";
+					}
+
+					if (i > 0) {
+						sb.append(",");
+					}
+
+					sb.append("\n\t").append(nomeColuna).append(' ').append(tipoColuna);
+				}
+			}
+
+			{
+
+				sb.append(",\n\tPRIMARY KEY( ");
+
+				for (int i = 0, achou = 0; i < atributos.length; i++) {
+
+					Field field = atributos[i];
+					if (field.isAnnotationPresent(Coluna.class)) {
+
+						Coluna anotacaoColuna = field.getAnnotation(Coluna.class);
+
+						if (anotacaoColuna.pk()) {
+
+							if (achou > 0) {
+								sb.append(", ");
+							}
 
 							if (anotacaoColuna.nome().isEmpty()) {
-								nomeColuna = field.getName().toUpperCase();
+								sb.append(field.getName().toUpperCase());
 							} else {
-								nomeColuna = anotacaoColuna.nome();
+								sb.append(anotacaoColuna.nome());
 							}
 
-						} else {
-							nomeColuna = field.getName().toUpperCase();
+							achou++;
 						}
 
-						Class<?> tipoParametro = field.getType();
-
-						if (tipoParametro.equals(String.class)) {
-							tipoColuna = "VARCHAR(100)";
-
-						} else if (tipoParametro.equals(int.class)) {
-							tipoColuna = "INT";
-						} else if (tipoParametro.equals(BigDecimal.class)){
-							tipoColuna = "DOUBLE";
-						}
-
-						if (i > 0) {
-							sb.append(",");
-						}
-
-						sb.append(nomeColuna).append(' ').append(tipoColuna);
 					}
-
-					sb.append(", PRIMARY KEY( ");
-
-					for (int i = 0, achou = 0; i < atributos.length; i++) {
-
-						Field field = atributos[i];
-
-						if (field.isAnnotationPresent(Coluna.class)) {
-
-							Coluna anotacaoColuna = field.getAnnotation(Coluna.class);
-
-							if (anotacaoColuna.pk()) {
-
-								if (achou > 0) {
-									sb.append(", ");
-								}
-
-								if (anotacaoColuna.nome().isEmpty()) {
-									sb.append(field.getName().toUpperCase());
-								} else {
-									sb.append(anotacaoColuna.nome());
-								}
-
-								achou++;
-							}
-
-						}
-					}
-
-					sb.append(" )");
-				
-				sb.append(" );");
-				String strSql = sb.toString();
-				System.out.println("SQL GERADO: " + strSql);
-
-				PreparedStatement ps = null;
-				try {
-					ps = con.prepareStatement(strSql);
-
-				} catch (SQLException e) {
-					e.printStackTrace();
-				} catch (IllegalArgumentException e) {
-					e.printStackTrace();
 				}
 
-				return ps;
-			} catch (SecurityException e) {
-				throw new RuntimeException(e);
+				sb.append(" )");
 			}
-		}
 
-		
-		
+			sb.append("\n);");
+			return sb.toString();
+
+		} catch (SecurityException e) {
+			throw new RuntimeException(e);
+			
+		}
+	
+	}
 		
 	public PreparedStatement getSqlInsert(Connection con, Object obj) {
 
@@ -306,13 +305,24 @@ public class ConexaoBanco {
 		return ps;
 	}
 	public static void main(String[] args) throws SQLException {
+		new ConexaoBanco(); 
+	}
+
+	public ConexaoBanco() {
 		try {
-			Connection con = new ConexaoBanco().abrirConexao();
-			new ConexaoBanco().getCreateTable(new Cliente(), con);
-			//new ConexaoBanco().getSqlSelectAll(con ,new Cliente());
+	        Connection con = abrirConexao();
+	        Cliente c = new Cliente();
+            PreparedStatement ps = getSqlSelectAll(con, c);
+            ResultSet resultado = ps.executeQuery();
+            resultado.next();
+			
+            ps.close();
+            resultado.close();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
 	}
 }
 

@@ -13,7 +13,7 @@ public class Cliente implements Serializable{
 	/**
 	 * 
 	 */
-	@Coluna (nome="CadId", pk=true)
+	@Coluna (nome="CADID", pk=true)
 	int id;
 	
 	@Coluna (nome="CadNome", tamanho=50)

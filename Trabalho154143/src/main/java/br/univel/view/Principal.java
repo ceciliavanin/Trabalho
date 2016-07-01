@@ -159,42 +159,16 @@ public class Principal extends JFrame {
 		});
 		
 		
-		JMenu mnRelatrios = new JMenu("Relat\u00F3rios");
-		menuBar.add(mnRelatrios);
-		
-		JMenuItem mntmClientes = new JMenuItem("Clientes");
-		mnRelatrios.add(mntmClientes);
-		mntmClientes.addActionListener(new ActionListener() {
+		JMenu mnRelatorios = new JMenu("Relat\u00F3rios");
+		menuBar.add(mnRelatorios);
+		mnRelatorios.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent arg0) {
-				ExportaXml ex = new ExportaXml();
-				ex.show();
+				Relatorio relatorio = new Relatorio();
+				relatorio.show();
 			}
 
-		});
-		
-		JMenuItem mntmProdutos = new JMenuItem("Produtos");
-		mnRelatrios.add(mntmProdutos);
-		mntmProdutos.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent arg0) {
-				ExportaXml ex = new ExportaXml();
-				ex.show();
-			}
-
-		});
-		
-		JMenuItem mntmVendas = new JMenuItem("Vendas");
-		mnRelatrios.add(mntmVendas);
-		mntmVendas.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent arg0) {
-				ExportaXml ex = new ExportaXml();
-				ex.show();
-			}
-
-		});
-		
+		});	
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		GridBagConstraints gbc_tabbedPane = new GridBagConstraints();
 		gbc_tabbedPane.gridheight = 2;

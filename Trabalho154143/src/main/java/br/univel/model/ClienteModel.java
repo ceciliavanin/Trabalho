@@ -17,7 +17,7 @@ public class ClienteModel extends AbstractTableModel{
 	
 	@Override
 	public int getColumnCount(){
-		return 3;
+		return 2;
 	}
 	
 	@Override
@@ -33,8 +33,6 @@ public class ClienteModel extends AbstractTableModel{
 				return "ID";
 			case 1:
 				return "NOME";
-			case 2:
-				return "CIDADE";
 			default:
 				return "erro";
 				
@@ -42,7 +40,7 @@ public class ClienteModel extends AbstractTableModel{
 		
 	}
 	
-	@Override
+	
 	public Object getValueAt(int row, int col){
 		
 		Cliente c = lista.get(row);

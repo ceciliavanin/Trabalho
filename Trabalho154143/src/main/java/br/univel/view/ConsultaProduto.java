@@ -10,8 +10,8 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
 import br.univel.Cliente;
-import br.univel.ExecutaBanco;
 import br.univel.Produto;
+import br.univel.banco.ExecutaBanco;
 import br.univel.model.ClienteModel;
 import br.univel.model.ProdutoModel;
 
