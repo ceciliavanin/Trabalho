@@ -21,15 +21,15 @@ public class CadClientes {
         List<Cliente> lista = new LinkedList<Cliente>();
         ps = cb.getSqlSelectAll(con, cl);
         resultado = ps.executeQuery();
-		
+		con.close();
         while (resultado.next()) {
-        
+
             lista.add(new Cliente(resultado.getInt("ID"), resultado.getString("nome"), resultado.getString("cidade"),
                     resultado.getString("estado"), resultado.getString("telefone")));
         }
-        
-        int id = lista.size()+1;		
-				
+
+        int id = lista.size()+1;
+
 		Cliente c = new Cliente(id, nome , cidade, estado, telefone);
 		cb.getSqlInsert(con, c);
 	}
