@@ -303,9 +303,9 @@ public class ConexaoBanco {
 
 			Connection con = abrirConexao();
 	        PreparedStatement ps;
-	        ps = con.prepareStatement(getCreateTable(new Cliente()));
+//	        ps = con.prepareStatement(getCreateTable(new Cliente()));
 
-			int res = ps.executeUpdate();
+	//		int res = ps.executeUpdate();
 			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
