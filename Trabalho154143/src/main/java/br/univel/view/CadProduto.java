@@ -21,7 +21,6 @@ import java.awt.event.ActionEvent;
 public class CadProduto extends JPanel {
 	private JTextField tfDescricao;
 	private JTextField tfPreco;
-	private BigDecimal txtTfpreco= ;
 
 	/**
 	 * Create the panel.
@@ -68,21 +67,22 @@ public class CadProduto extends JPanel {
 		gbc_lblPre.gridy = 2;
 		add(lblPre, gbc_lblPre);
 		
-		txtTfpreco = new JTextField();
+		tfPreco = new JTextField();
 		GridBagConstraints gbc_txtTfpreco = new GridBagConstraints();
 		gbc_txtTfpreco.insets = new Insets(0, 0, 5, 5);
 		gbc_txtTfpreco.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtTfpreco.gridx = 2;
 		gbc_txtTfpreco.gridy = 2;
-		add(txtTfpreco, gbc_txtTfpreco);
-		txtTfpreco.setColumns(10);
+		add(tfPreco, gbc_txtTfpreco);
+		tfPreco.setColumns(10);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.addActionListener(new ActionListener() {
 			
+			BigDecimal valor;
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				CadProdutos cp = new CadProduto();
+				CadProdutos cp = new CadProdutos();
 				cp.cadastro(tfDescricao.getText(), tfPreco.getText());
 			}
 		}); 

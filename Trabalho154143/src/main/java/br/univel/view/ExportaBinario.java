@@ -107,7 +107,6 @@ public class ExportaBinario extends JFrame {
 				}else {
 					JOptionPane.showMessageDialog(rootPane, "Selecionar uma opção para exportar!");
 				}
-
 			
 			}
 		});

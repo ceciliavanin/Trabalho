@@ -8,8 +8,13 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.awt.event.ActionEvent;
 import java.awt.Insets;
+
+import br.univel.RealizaVenda;
 import br.univel.Venda;
 @SuppressWarnings("serial")
 public class CadVenda extends JPanel {
@@ -20,7 +25,8 @@ public class CadVenda extends JPanel {
 	private JTextField tfTotal;
 	private JTextField tfRecebido;
 	private JTextField tfTroco;
-
+	private BigDecimal vt;
+	private NumberFormat nf = NumberFormat.getCurrencyInstance();
 	/**
 	 * Create the panel.
 	 */
@@ -188,6 +194,7 @@ public class CadVenda extends JPanel {
 		tfRecebido.setColumns(10);
 		
 		JLabel lblTroco = new JLabel("Troco");
+		
 		GridBagConstraints gbc_lblTroco = new GridBagConstraints();
 		gbc_lblTroco.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblTroco.insets = new Insets(0, 0, 5, 5);
@@ -230,7 +237,9 @@ public class CadVenda extends JPanel {
 	}
 	
 	private void venda() {
-		Venda res = new Venda();
+		
+		RealizaVenda realizaVenda = new RealizaVenda();
+		
 		
 	}
 }
