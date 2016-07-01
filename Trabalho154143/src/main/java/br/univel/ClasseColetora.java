@@ -108,12 +108,16 @@ public class ClasseColetora {
 		Pattern c = Pattern.compile("[0-9]+.*");
 
 		lista.forEach(e -> {
-			Matcher m = c.matcher(e);
-			if (m.matches()) {
-				listaCl.add(getCliente(e));
-			}
-		});
 
+			if (!e.startsWith("id")){
+
+				Matcher m = c.matcher(e);
+				if (m.matches()) {
+					listaCl.add(getCliente(e));
+				}
+			}	
+			});
+		
 		return listaCl;
 	}
 
@@ -150,4 +154,5 @@ public class ClasseColetora {
 		}
 		return false;
 	}
+	
 }

@@ -113,6 +113,15 @@ public class CadCliente extends JPanel {
 		tfTelefone.setColumns(10);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				CadCliente cli = new CadCliente();
+				cli.cadastro();
+				
+			}
+		});
 		GridBagConstraints gbc_btnCadastrar = new GridBagConstraints();
 		gbc_btnCadastrar.anchor = GridBagConstraints.NORTHEAST;
 		gbc_btnCadastrar.insets = new Insets(0, 0, 0, 5);

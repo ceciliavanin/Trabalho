@@ -12,6 +12,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
+
+import org.eclipse.jdt.internal.compiler.batch.Main;
+
 import br.univel.Cliente;
 import br.univel.banco.Coluna;
 import br.univel.banco.Tabela;
@@ -305,6 +308,20 @@ public class ConexaoBanco {
 
 	
 	public ConexaoBanco() {
-		
+		try {
+			Connection con = abrirConexao();
+	        PreparedStatement ps;
+	        ps = getSqlInsert(con, new Cliente());
+			ps.executeUpdate();
+			int res = ps.executeUpdate();
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	public static void main(String[] args) {
+		new ConexaoBanco();
 	}
 }

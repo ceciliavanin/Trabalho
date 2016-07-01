@@ -7,13 +7,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 import br.univel.banco.Coluna;
 import br.univel.banco.Tabela;
 
-@Tabela ("CLIENTE")
+@Tabela ("CLIENTES")
 @XmlRootElement
 public class Cliente implements Serializable{
 	/**
 	 * 
 	 */
-	@Coluna (nome = "id", pk=true)
+	@Coluna (nome = "ID", pk=true)
 	int id;
 	
 	@Coluna (nome="nome", tamanho=50)

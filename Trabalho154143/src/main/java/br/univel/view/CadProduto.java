@@ -71,6 +71,13 @@ public class CadProduto extends JPanel {
 		txtTfpreco.setColumns(10);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		}); 
 		GridBagConstraints gbc_btnCadastrar = new GridBagConstraints();
 		gbc_btnCadastrar.insets = new Insets(0, 0, 0, 5);
 		gbc_btnCadastrar.gridx = 1;
