@@ -7,7 +7,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import br.univel.Cliente;
+import br.univel.Produto;
 import br.univel.SerIMP;
+import br.univel.Venda;
 
 import java.awt.GridBagLayout;
 import javax.swing.JRadioButton;
@@ -87,19 +90,21 @@ public class ImportarBinario extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				SerIMP s = new SerIMP();
-				File f = new File(Local.getText());
 				if (rdbtnVenda.isSelected()) {
+					File f = new File("Venda"); 
 					s.gravar(Venda.class, f);
 					JOptionPane.showMessageDialog(rootPane,
 							"Arquivo importado com sucesso!");
 
 				} else if (rdbtnCliente.isSelected()) {
-					s.gravar(Venda.class, f);
+					File f = new File("Cliente"); 
+					s.gravar(Cliente.class, f);
 					JOptionPane.showMessageDialog(rootPane,
 							"Arquivo importado com sucesso!");
 
 				} else if (rdbtnProduto.isSelected()) {
-					s.gravar(Venda.class, f);
+					File f = new File("Produto"); 
+					s.gravar(Produto.class,f);
 					JOptionPane.showMessageDialog(rootPane,
 						"Arquivo importado com sucesso!");
 				}

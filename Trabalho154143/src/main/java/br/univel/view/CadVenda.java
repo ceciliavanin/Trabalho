@@ -10,9 +10,9 @@ import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Insets;
-
+import br.univel.Venda;
 @SuppressWarnings("serial")
-public class Venda extends JPanel {
+public class CadVenda extends JPanel {
 	private JTextField tfData;
 	private JTextField tfId;
 	private JTextField tfNomeCliente;
@@ -24,7 +24,7 @@ public class Venda extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public Venda() {
+	public CadVenda() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 59, 33, 51, 22, 46, 6, 49, 77, 0};
 		gridBagLayout.rowHeights = new int[]{20, 20, 23, 34, 14, 103, 20, 20, 0, 0, 0};
@@ -149,6 +149,16 @@ public class Venda extends JPanel {
 		add(lblNewLabel_1, gbc_lblNewLabel_1);
 		
 		tfTotal = new JTextField();
+		tfTotal.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				venda();
+				
+			}
+
+			
+		});
 		GridBagConstraints gbc_tfTotal = new GridBagConstraints();
 		gbc_tfTotal.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tfTotal.anchor = GridBagConstraints.NORTH;
@@ -216,6 +226,11 @@ public class Venda extends JPanel {
 		gbc_btnCancelar.gridx = 3;
 		gbc_btnCancelar.gridy = 9;
 		add(btnCancelar, gbc_btnCancelar);
+		
+	}
+	
+	private void venda() {
+		Venda res = new Venda();
 		
 	}
 }

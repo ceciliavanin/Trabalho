@@ -12,6 +12,7 @@ import br.univel.Cliente;
 import br.univel.GravaXml;
 import br.univel.Produto;
 import br.univel.SerIMP;
+import br.univel.Venda;
 
 import java.awt.GridBagLayout;
 import javax.swing.JRadioButton;
@@ -95,12 +96,12 @@ public class ExportaBinario extends JFrame {
 				}
 				else if (rdbtnCliente.isSelected()){
 					File f = new File("Cliente");
-					s.gravar(Venda.class, f);
+					s.gravar(Cliente.class, f);
 					JOptionPane.showMessageDialog(rootPane, "Arquivo exportado com sucesso!");
 
 				}else if (rdbtnProduto.isSelected()){
 					File f = new File("Produto");
-					s.gravar(Venda.class, f);
+					s.gravar(Produto.class, f);
 					JOptionPane.showMessageDialog(rootPane, "Arquivo exportado com sucesso!");
 
 				}else {

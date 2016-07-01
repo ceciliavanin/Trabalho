@@ -165,7 +165,7 @@ public class Principal extends JFrame {
 			
 			public void actionPerformed(ActionEvent arg0) {
 				Relatorio relatorio = new Relatorio();
-				relatorio.setVisible(true);
+				relatorio.show();
 			}
 
 		});	
@@ -203,7 +203,7 @@ public class Principal extends JFrame {
 			}
 			
 		}
-		Venda telaVenda = new Venda();
+		CadVenda telaVenda = new CadVenda();
 		tabbedPane.addTab(titulo , telaVenda);
 		mostra();
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);

@@ -7,6 +7,8 @@ import javax.swing.border.EmptyBorder;
 import br.univel.Cliente;
 import br.univel.LerXML;
 import br.univel.Produto;
+import br.univel.Venda;
+
 import java.awt.GridBagLayout;
 import javax.swing.JRadioButton;
 import java.awt.GridBagConstraints;
